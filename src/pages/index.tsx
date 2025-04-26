@@ -27,11 +27,12 @@ const services = [
 export default function Home() {
   const heroRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const dejnyoTextRef = useRef<HTMLHeadingElement>(null);
 
   const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
     cardRefs.current[index] = el;
   };
-    const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -40,6 +41,7 @@ export default function Home() {
     }
   }, []);
 
+  // Services Section Animation
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -47,11 +49,10 @@ export default function Home() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top+=100 top",
-        end: "+=600", // scrolls over 1000px to finish
+        end: "+=600",
         scrub: true,
-        pin: true, // locks the section while animation plays
-      }
-      
+        pin: true,
+      },
     });
 
     cardRefs.current.forEach((card, index) => {
@@ -69,7 +70,7 @@ export default function Home() {
             rotate: 0,
             duration: 1,
           },
-          index * 0.2 // stagger timing
+          index * 0.2
         );
       }
     });
@@ -79,6 +80,33 @@ export default function Home() {
     };
   }, []);
 
+  // Parallax for DejnyO background text
+  useEffect(() => {
+    if (!dejnyoTextRef.current) return;
+
+    gsap.to(dejnyoTextRef.current, {
+      yPercent: -1,
+      ease: "none",
+      scrollTrigger: {
+        trigger: dejnyoTextRef.current,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
+  useEffect(() => {
+    gsap.to("#frost-layer", {
+      opacity: 0.7,
+      scrollTrigger: {
+        trigger: heroRef.current,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+      },
+    });
+  }, []);
+  
   const handleSearch = (query: string) => {
     const elements = document.querySelectorAll("section, h1, h2, h3, p");
     elements.forEach((el) => {
@@ -93,7 +121,7 @@ export default function Home() {
   return (
     <div className="bg-black text-white font-sans">
       <Head>
-        <title>DejnyO - Music, Web, and Creative Apps</title>
+        <title>DejnyO</title>
         <meta name="description" content="DejnyO - Designing next-gen music-focused websites and apps with a punch of aesthetic graphics." />
       </Head>
 
@@ -112,56 +140,77 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="min-h-screen flex flex-col justify-center items-center text-center px-6 bg-black">
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-5xl md:text-7xl font-bold mb-4 text-blue-500"
+<section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden bg-black px-6">
+  {/* Blurred Animated Background */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20 rounded-full blur-3xl animate-pulse-slow transform -translate-x-1/2 -translate-y-1/2" />
+  </div>
+{/* Particle background */}
+<div className="absolute inset-0 overflow-hidden pointer-events-none">
+  {Array.from({ length: 30 }).map((_, i) => (
+    <div
+      key={i}
+      className="absolute w-1 h-1 bg-white/20 rounded-full animate-particle"
+      style={{
+        top: `${Math.random() * 100}%`,
+        left: `${Math.random() * 100}%`,
+        animationDuration: `${5 + Math.random() * 10}s`,
+        animationDelay: `${Math.random() * 4}s`,
+      }}
+    />
+  ))}
+</div>
+<div className="absolute inset-0 bg-white/5 backdrop-blur-sm opacity-0" id="frost-layer" />
+
+  {/* Foreground Hero Content */}
+  <motion.h1
+    initial={{ opacity: 0, scale: 0.9 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 1.2 }}
+    className="text-6xl md:text-8xl font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500"
+  >
+    DejnyO
+  </motion.h1>
+  
+
+  <motion.p
+    initial={{ opacity: 0, y: 30 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.6, duration: 1 }}
+    className="text-xl md:text-2xl text-gray-300 max-w-2xl"
+  >
+    Crafting immersive websites and apps with music, motion, and creativity.
+  </motion.p>
+</section>
+
+
+      {/* About Section with Parallax DejnyO */}
+      <section className="relative py-32 px-6 max-w-7xl mx-auto overflow-hidden">
+        {/* Giant floating background text */}
+        <h2
+          ref={dejnyoTextRef}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 select-none whitespace-nowrap pointer-events-none opacity-20"
         >
           DejnyO
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-          className="text-xl md:text-2xl max-w-2xl text-gray-300"
-        >
-          We craft immersive websites and apps with a deep focus on music, motion, and creative visuals.
-        </motion.p>
+        </h2>
+
+
+        {/* Foreground content */}
+        <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="mx-10"
+          >
+            <h3 className="text-4xl font-bold mb-6 text-blue-400">Who We Are</h3>
+            <p className="text-lg text-gray-300 leading-relaxed">
+              DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
+            </p>
+          </motion.div>
+        </div>
       </section>
-
-      <section className="relative py-32 px-6 max-w-7xl mx-auto overflow-hidden">
-  {/* Giant floating background text */}
-  <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[120px] md:text-[200px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 opacity-5 pointer-events-none select-none whitespace-nowrap">
-    About
-  </h2>
-
-  <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
-    {/* Text */}
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      viewport={{ once: true }}
-      className="mx-10"
-    >
-      <h3 className="text-4xl font-bold mb-6 text-blue-400">Who We Are</h3>
-      <p className="text-lg text-gray-300 leading-relaxed">
-        DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
-      </p>
-    </motion.div>
-
-    {/* Optional: Animated background visual */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 1.2, delay: 0.2 }}
-      viewport={{ once: true }}
-      className="w-full h-64 md:h-96 rounded-3xl bg-gradient-to-br from-blue-500/20 via-cyan-400/20 to-blue-600/20 backdrop-blur-lg shadow-2xl"
-    ></motion.div>
-  </div>
-</section>
 
       {/* Services Section */}
       <section ref={containerRef} className="relative py-36 bg-black overflow-hidden">
@@ -194,7 +243,7 @@ export default function Home() {
       <section className="py-20 px-6 max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-6 text-blue-400">Need a Website?</h2>
         <p className="text-lg text-gray-300 mb-8">
-          We build fully custom websites for individuals, artists, and businesses. Whether you're starting from scratch or need a redesign—we&apos;ve got you. Get in touch and let&apos;s build something amazing together.
+          We build fully custom websites for individuals, artists, and businesses. Whether you're starting from scratch or need a redesign—we've got you.
         </p>
         <a
           href="mailto:contact@dejnyo.com"
@@ -223,8 +272,8 @@ export default function Home() {
 
       {/* Contact Section */}
       <section className="bg-black py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold mb-6 text-blue-400">Let&apos;s Create Together</h2>
-        <p className="text-lg mb-8 text-gray-400">Interested in working with us? Reach out and let&apos;s bring your idea to life.</p>
+        <h2 className="text-4xl font-bold mb-6 text-blue-400">Let's Create Together</h2>
+        <p className="text-lg mb-8 text-gray-400">Interested in working with us? Reach out and let's bring your idea to life.</p>
         <a href="mailto:contact@dejnyo.com" className="bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition">
           contact@dejnyo.com
         </a>
