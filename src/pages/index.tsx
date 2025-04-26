@@ -358,11 +358,11 @@ export default function Home() {
   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50 pointer-events-none"></div>
 
   <h2 className="text-5xl md:text-6xl font-extrabold mb-8 py-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
-    Let's Create Together
+    Let&apos;s Create Together
   </h2>
 
   <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12">
-    Your ideas deserve more than templates. Let's build something unforgettable — coded, crafted, and customized by DejnyO.
+    Your ideas deserve more than templates. Let&apos;s build something unforgettable — coded, crafted, and customized by DejnyO.
   </p>
 
   <a
