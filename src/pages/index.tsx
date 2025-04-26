@@ -202,7 +202,8 @@ export default function Home() {
             viewport={{ once: true }}
             className="mx-10"
           >
-            <h3 className="text-4xl font-bold mb-6 text-blue-400">Who We Are</h3>
+           <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+           Who We Are</h3>
             <p className="text-lg text-gray-300 leading-relaxed">
               DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
             </p>
@@ -216,24 +217,26 @@ export default function Home() {
           <h2 className="text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
             What We Create
           </h2>
-
           <div className="relative w-full h-[400px]">
-            {services.map((service, index) => (
-              <div
-                key={index}
-                ref={setCardRef(index)}
-                className="absolute bg-white/10 backdrop-blur-xl rounded-3xl p-8 w-80 shadow-2xl hover:scale-105 hover:rotate-0 transition-all duration-500"
-                style={{
-                  top: index === 0 ? '50px' : index === 1 ? '100px' : '200px',
-                  left: index === 0 ? '10%' : index === 1 ? '70%' : '40%',
-                }}
-              >
-                <div className="text-5xl mb-4">{service.icon}</div>
-                <h3 className="text-2xl font-bold mb-2 text-blue-300">{service.title}</h3>
-                <p className="text-gray-300">{service.description}</p>
-              </div>
-            ))}
-          </div>
+  {services.map((service, index) => (
+    <div
+      key={index}
+      ref={setCardRef(index)}
+      className="absolute group bg-gradient-to-br from-gray-200/10 via-gray-300/10 to-gray-400/10 border border-gray-600 hover:border-blue-400 backdrop-blur-md rounded-3xl p-8 w-80 shadow-md hover:scale-105 hover:rotate-0 transition-all duration-500"
+      style={{
+        top: index === 0 ? '50px' : index === 1 ? '100px' : '200px',
+        left: index === 0 ? '10%' : index === 1 ? '70%' : '40%',
+      }}
+    >
+      <div className="text-5xl mb-4">{service.icon}</div>
+      <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-400 group-hover:-translate-y-1 transition-transform duration-300">
+        {service.title}
+      </h3>
+      <p className="text-gray-400">{service.description}</p>
+    </div>
+  ))}
+</div>
+
         </div>
       </section>
 
@@ -262,7 +265,7 @@ export default function Home() {
     </div>
 
     {/* Pro Plan (Highlighted) */}
-    <div className="bg-gradient-to-br from-blue-600/60 via-cyan-500/50 to-blue-700/50 p-10 rounded-3xl shadow-2xl hover:scale-110 hover:shadow-blue-500/30 transition-all duration-500 flex flex-col justify-between transform md:-translate-y-6 border-2 border-blue-400">
+    <div className="bg-gradient-to-br from-blue-600/60 hover:from-cyan-500/50 hover:via-blue-600/60 hover:to-cyan-700/50 via-cyan-500/50 to-blue-700/50 p-10 rounded-3xl shadow-2xl hover:scale-110 hover:shadow-blue-500/30 transition-all duration-500 flex flex-col justify-between transform md:-translate-y-6 border-2 border-blue-400">
       <div>
         <h3 className="text-3xl font-bold text-white mb-2">Pro</h3>
         <p className="text-4xl font-extrabold text-white mb-1">$99</p>
@@ -299,36 +302,95 @@ export default function Home() {
 
 
 
-      {/* Featured Work */}
-      <section className="py-20 px-6 max-w-5xl mx-auto">
-        <h2 className="text-4xl font-bold mb-10 text-center text-blue-400">Our Work</h2>
-        <div className="grid md:grid-cols-2 gap-10">
-          <div className="bg-gray-100/10 border border-gray-700 p-4 rounded-xl">
-            <a href="https://moodify.dejny.eu" target="_blank" rel="noopener noreferrer">
-              <h4 className="text-xl font-semibold mb-2 text-blue-300 hover:underline">Moodify</h4>
-            </a>
-            <p className="text-gray-300">A mood-based music recommendation site with animated transitions and interactive quiz flow.</p>
-          </div>
-          <div className="bg-gray-100/10 border border-gray-700 p-4 rounded-xl">
-            <h4 className="text-xl font-semibold mb-2 text-blue-300">SoundSwipe</h4>
-            <p className="text-gray-300">A social music platform where users connect over shared listening habits and playlists.</p>
-          </div>
-        </div>
-      </section>
+     {/* Our Work Section */}
+{/* Our Work Section */}
+<section className="py-32 px-6 max-w-7xl mx-auto text-center">
+  {/* Gradient Title */}
+  <h2 className="text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+    Our Work
+  </h2>
 
-      {/* Contact Section */}
-      <section className="bg-black py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold mb-6 text-blue-400">Let's Create Together</h2>
-        <p className="text-lg mb-8 text-gray-400">Interested in working with us? Reach out and let's bring your idea to life.</p>
-        <a href="mailto:contact@dejnyo.com" className="bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition">
-          contact@dejnyo.com
-        </a>
-      </section>
+  <div className="grid md:grid-cols-2 gap-10">
+    {/* Moodify */}
+    <motion.a
+      href="https://moodify.dejny.eu"
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      className="group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400"
+    >
+      <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
+        Moodify
+      </h3>
+      <p className="text-gray-400">
+        A mood-based music recommendation site with animated transitions and interactive quiz flow.
+      </p>
+    </motion.a>
 
-      {/* Footer */}
-      <footer className="py-8 text-center text-sm text-gray-500 bg-black">
-        © {new Date().getFullYear()} DejnyO. Built with code, music & style.
-      </footer>
+    {/* SoundSwipe */}
+    <motion.a
+      href="#"
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+      className="group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400"
+    >
+      <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
+        SoundSwipe
+      </h3>
+      <p className="text-gray-400">
+        A social music platform where users connect over shared listening habits and playlists.
+      </p>
+    </motion.a>
+  </div>
+</section>
+
+
+{/* Contact Section */}
+<section className="py-36 px-6  mx-auto text-center relative overflow-hidden">
+  {/* Optional subtle background gradient */}
+  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50 pointer-events-none"></div>
+
+  <h2 className="text-5xl md:text-6xl font-extrabold mb-8 py-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+    Let's Create Together
+  </h2>
+
+  <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12">
+    Your ideas deserve more than templates. Let's build something unforgettable — coded, crafted, and customized by DejnyO.
+  </p>
+
+  <a
+    href="mailto:contact@dejnyo.com"
+    className="inline-block bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 text-white  font-bold py-4 px-10 rounded-full shadow-xl hover:scale-105 transition-transform duration-300"
+  >
+    contact@dejnyo.com
+  </a>
+</section>
+
+
+   {/* Footer */}
+<footer className="py-4 text-center text-sm text-gray-500 bg-black relative overflow-hidden">
+  {/* Divider line */}
+  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-11/12 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+  <motion.div
+    initial={{ opacity: 0, y: 10 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 1 }}
+    className="relative z-10"
+  >
+    <p className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400/70 via-cyan-400 to-blue-500/70 mb-1">
+      © {new Date().getFullYear()} DejnyO
+    </p>
+  </motion.div>
+</footer>
+
     </div>
   );
 }
