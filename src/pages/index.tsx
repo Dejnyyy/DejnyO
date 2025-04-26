@@ -193,8 +193,6 @@ export default function Home() {
         >
           DejnyO
         </h2>
-
-
         {/* Foreground content */}
         <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -239,19 +237,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Offer Section */}
-      <section className="py-20 px-6 max-w-4xl mx-auto text-center">
-        <h2 className="text-4xl font-bold mb-6 text-blue-400">Need a Website?</h2>
-        <p className="text-lg text-gray-300 mb-8">
-          We build fully custom websites for individuals, artists, and businesses. Whether you're starting from scratch or need a redesign—we've got you.
+      {/* Offer Section */}{/* Offer Section - 3 Website Tiers */}
+{/* Offer Section - 3 Website Tiers */}
+{/* Offer Section - Updated Pricing Models */}
+<section className="py-24 px-6 max-w-7xl mx-auto text-center">
+  <h2 className="text-5xl font-bold mb-16 text-blue-400">Need a Website?</h2>
+
+  <div className="grid md:grid-cols-3 gap-10 items-start">
+    {/* Basic Plan */}
+    <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 flex flex-col justify-between">
+      <div>
+        <h3 className="text-2xl font-bold text-blue-300 mb-2">Basic</h3>
+        <p className="text-3xl font-extrabold text-white mb-1">$10<span className="text-lg font-normal">/month</span></p>
+        <p className="text-gray-300 mb-6">
+          Starter package. Hosting, domain, security, and lifetime updates for different events and occasions.
         </p>
-        <a
-          href="mailto:contact@dejnyo.com"
-          className="bg-blue-500 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-600 transition"
-        >
-          Get a Quote
-        </a>
-      </section>
+      </div>
+      <a
+        href="mailto:contact@dejnyo.com"
+        className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition"
+      >
+        Subscribe
+      </a>
+    </div>
+
+    {/* Pro Plan (Highlighted) */}
+    <div className="bg-gradient-to-br from-blue-600/60 via-cyan-500/50 to-blue-700/50 p-10 rounded-3xl shadow-2xl hover:scale-110 hover:shadow-blue-500/30 transition-all duration-500 flex flex-col justify-between transform md:-translate-y-6 border-2 border-blue-400">
+      <div>
+        <h3 className="text-3xl font-bold text-white mb-2">Pro</h3>
+        <p className="text-4xl font-extrabold text-white mb-1">$99</p>
+        <p className="text-gray-200 mb-6">
+          One-time payment. Professional custom site with SEO, unique animations, and branding polish.
+        </p>
+      </div>
+      <a
+        href="mailto:contact@dejnyo.com"
+        className="mt-6 inline-block bg-white hover:bg-gray-200 hover:scale-105 text-black font-bold py-2 px-6 rounded-full transition"
+      >
+        Get a Quote
+      </a>
+    </div>
+
+    {/* Elite Plan */}
+    <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 flex flex-col justify-between">
+      <div>
+        <h3 className="text-2xl font-bold text-blue-300 mb-2">Elite</h3>
+        <p className="text-3xl font-extrabold text-white mb-1">$199</p>
+        <p className="text-gray-300 mb-6">
+          Full custom solution. Web apps, e-commerce, interactive design — tailor-made to your needs.
+        </p>
+      </div>
+      <a
+        href="mailto:contact@dejnyo.com"
+        className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition"
+      >
+        Get a Quote
+      </a>
+    </div>
+  </div>
+</section>
+
+
 
       {/* Featured Work */}
       <section className="py-20 px-6 max-w-5xl mx-auto">
