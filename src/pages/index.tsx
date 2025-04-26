@@ -131,18 +131,42 @@ export default function Home() {
         </motion.p>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 px-6 max-w-4xl mx-auto bg-gray-900/60">
-        <h2 className="text-4xl font-bold mb-6 text-blue-400">Who We Are</h2>
-        <p className="text-lg text-gray-300">
-          DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge—most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity—we believe visuals should move with the rhythm.
-        </p>
-      </section>
+      <section className="relative py-32 px-6 max-w-7xl mx-auto overflow-hidden">
+  {/* Giant floating background text */}
+  <h2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[120px] md:text-[200px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 opacity-5 pointer-events-none select-none whitespace-nowrap">
+    About
+  </h2>
+
+  <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+    {/* Text */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+      className="mx-10"
+    >
+      <h3 className="text-4xl font-bold mb-6 text-blue-400">Who We Are</h3>
+      <p className="text-lg text-gray-300 leading-relaxed">
+        DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
+      </p>
+    </motion.div>
+
+    {/* Optional: Animated background visual */}
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 1.2, delay: 0.2 }}
+      viewport={{ once: true }}
+      className="w-full h-64 md:h-96 rounded-3xl bg-gradient-to-br from-blue-500/20 via-cyan-400/20 to-blue-600/20 backdrop-blur-lg shadow-2xl"
+    ></motion.div>
+  </div>
+</section>
 
       {/* Services Section */}
       <section ref={containerRef} className="relative py-36 bg-black overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-20 relative">
-          <h2 className="text-6xl font-extrabold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+        <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12 relative">
+          <h2 className="text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
             What We Create
           </h2>
 
@@ -170,7 +194,7 @@ export default function Home() {
       <section className="py-20 px-6 max-w-4xl mx-auto text-center">
         <h2 className="text-4xl font-bold mb-6 text-blue-400">Need a Website?</h2>
         <p className="text-lg text-gray-300 mb-8">
-          We build fully custom websites for individuals, artists, and businesses. Whether you're starting from scratch or need a redesign—we’ve got you. Get in touch and let’s build something amazing together.
+          We build fully custom websites for individuals, artists, and businesses. Whether you're starting from scratch or need a redesign—we&apos;ve got you. Get in touch and let&apos;s build something amazing together.
         </p>
         <a
           href="mailto:contact@dejnyo.com"
@@ -199,8 +223,8 @@ export default function Home() {
 
       {/* Contact Section */}
       <section className="bg-black py-20 px-6 text-center">
-        <h2 className="text-4xl font-bold mb-6 text-blue-400">Let’s Create Together</h2>
-        <p className="text-lg mb-8 text-gray-400">Interested in working with us? Reach out and let’s bring your idea to life.</p>
+        <h2 className="text-4xl font-bold mb-6 text-blue-400">Let&apos;s Create Together</h2>
+        <p className="text-lg mb-8 text-gray-400">Interested in working with us? Reach out and let&apos;s bring your idea to life.</p>
         <a href="mailto:contact@dejnyo.com" className="bg-white text-black px-6 py-3 rounded-full font-bold hover:bg-gray-200 transition">
           contact@dejnyo.com
         </a>
