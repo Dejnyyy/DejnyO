@@ -63,8 +63,8 @@ export default function Home() {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top+=100 top",
-          end: "+=600",
-          scrub: true,
+          end: "+=400",
+          scrub: 0.1,
           pin: true,
         },
       });
