@@ -13,7 +13,8 @@
     "gsap": "^3.12.7",
     "next": "15.3.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-parallax-tilt": "^1.7.293"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

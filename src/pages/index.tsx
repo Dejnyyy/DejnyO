@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Head from "next/head";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Tilt from 'react-parallax-tilt';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,7 +34,16 @@ export default function Home() {
   const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
     cardRefs.current[index] = el;
   };
+ // Track mouse for each card
+ const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+ const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
+   const rect = e.currentTarget.getBoundingClientRect();
+   setMousePos({
+     x: e.clientX - rect.left,
+     y: e.clientY - rect.top,
+   });
+ };
   useEffect(() => {
     window.scrollTo(0, 0);
     if (heroRef.current) {
@@ -143,7 +153,7 @@ export default function Home() {
 <section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden bg-black px-6">
   {/* Blurred Animated Background */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20 rounded-full blur-3xl animate-pulse-slow transform -translate-x-1/2 -translate-y-1/2" />
+    <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
   </div>
 {/* Particle background */}
 <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -218,30 +228,28 @@ export default function Home() {
             What We Create
           </h2>
           <div className="relative w-full h-[400px]">
-  {services.map((service, index) => (
-    <div
-      key={index}
-      ref={setCardRef(index)}
-      className="absolute group bg-gradient-to-br from-gray-200/10 via-gray-300/10 to-gray-400/10 border border-gray-600 hover:border-blue-400 backdrop-blur-md rounded-3xl p-8 w-80 shadow-md hover:scale-105 hover:rotate-0 transition-all duration-500"
-      style={{
-        top: index === 0 ? '50px' : index === 1 ? '100px' : '200px',
-        left: index === 0 ? '10%' : index === 1 ? '70%' : '40%',
-      }}
-    >
-      <div className="text-5xl mb-4">{service.icon}</div>
-      <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-400 group-hover:-translate-y-1 transition-transform duration-300">
-        {service.title}
-      </h3>
-      <p className="text-gray-400">{service.description}</p>
-    </div>
-  ))}
-</div>
-
+      {services.map((service, index) => (
+        <div
+          key={index}
+          ref={setCardRef(index)}
+          className="absolute group bg-gradient-to-br from-gray-200/10 via-gray-300/10 to-gray-400/10 border border-gray-600 hover:border-blue-400 backdrop-blur-md rounded-3xl p-8 w-80 shadow-md hover:scale-105 hover:rotate-0 transition-all duration-500"
+          style={{
+            top: index === 0 ? '50px' : index === 1 ? '100px' : '200px',
+            left: index === 0 ? '10%' : index === 1 ? '70%' : '40%',
+          }}
+        >
+          <div className="text-5xl mb-4">{service.icon}</div>
+          <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-400 group-hover:-translate-y-1 transition-transform duration-300">
+            {service.title}
+          </h3>
+          <p className="text-gray-400">{service.description}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* Offer Section */}{/* Offer Section - 3 Website Tiers */}
-{/* Offer Section - 3 Website Tiers */}
+
 {/* Offer Section - Updated Pricing Models */}
 <section className="py-24 px-6 max-w-7xl mx-auto text-center">
   <h2 className="text-5xl font-bold mb-16 text-blue-400">Need a Website?</h2>
@@ -300,9 +308,54 @@ export default function Home() {
   </div>
 </section>
 
+{/* Our Team Section */}
+<section className="py-32 px-6 max-w-7xl mx-auto text-center">
+  <h2 className="text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+    Our Team
+  </h2>
 
+  <div className="grid md:grid-cols-2 gap-10">
+    {/* Team Member 1 */}
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.02} tiltMaxAngleX={10} tiltMaxAngleY={10}>
+        <div className="group relative bg-white/5 backdrop-blur-md p-8 rounded-3xl shadow-2xl border-2 border-blue-400 animate-pulse-slow overflow-hidden hover:scale-105 transition-all duration-500 text-center">
+          {/* Floating Shine */}
+          <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
+          <h3 className="text-2xl font-bold text-blue-300 mb-2">Dejny</h3>
+          <p className="text-gray-400 mb-2">Founder & Developer</p>
+          <p className="text-gray-500 text-sm mb-2 italic">"Building beats with code."</p>
+          <p className="text-gray-500 text-xs">Leading the creative vision of DejnyO.</p>
+        </div>
+      </Tilt>
+    </motion.div>
 
-     {/* Our Work Section */}
+    {/* Team Member 2 */}
+    <motion.div
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+    >
+      <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.02} tiltMaxAngleX={10} tiltMaxAngleY={10}>
+        <div className="group relative bg-white/5 backdrop-blur-md p-8 rounded-3xl shadow-2xl border-2 border-blue-400 animate-pulse-slow overflow-hidden hover:scale-105 transition-all duration-500 text-center">
+          {/* Floating Shine */}
+          <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
+
+          <h3 className="text-2xl font-bold text-blue-300 mb-2">Oskkys</h3>
+          <p className="text-gray-400 mb-2">Creative Partner</p>
+          <p className="text-gray-500 text-sm mb-2 italic">"Energy behind every idea."</p>
+          <p className="text-gray-500 text-xs">Shaping the energy and feel of every project.</p>
+        </div>
+      </Tilt>
+    </motion.div>
+  </div>
+</section>
+
 {/* Our Work Section */}
 <section className="py-32 px-6 max-w-7xl mx-auto text-center">
   {/* Gradient Title */}
@@ -311,43 +364,58 @@ export default function Home() {
   </h2>
 
   <div className="grid md:grid-cols-2 gap-10">
-    {/* Moodify */}
-    <motion.a
-      href="https://moodify.dejny.eu"
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className="group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400"
-    >
-      <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
-        Moodify
-      </h3>
-      <p className="text-gray-400">
-        A mood-based music recommendation site with animated transitions and interactive quiz flow.
-      </p>
-    </motion.a>
-
-    {/* SoundSwipe */}
-    <motion.a
-      href="#"
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-      className="group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400"
-    >
-      <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
-        SoundSwipe
-      </h3>
-      <p className="text-gray-400">
-        A social music platform where users connect over shared listening habits and playlists.
-      </p>
-    </motion.a>
+    {[
+      {
+        title: "Moodify",
+        description: "A mood-based music recommendation site with animated transitions and interactive quiz flow.",
+        href: "https://moodify.dejny.eu",
+      },
+      {
+        title: "SoundSwipe",
+        description: "A social music platform where users connect over shared listening habits and playlists.",
+        href: "#",
+      },
+      {
+        title: "HearMe",
+        description: "Website about voting best song everyday and showing people what kind of music is trendy each day",
+        href: "https://hearme.dejny.eu",
+      },
+      // 🔥 ADD MORE PROJECTS HERE
+    ].map((project, index, array) => {
+      const isLastOdd = array.length % 2 === 1 && index === array.length - 1;
+      return (
+        <motion.a
+        key={index}
+        href={project.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+        onMouseMove={handleMouseMove}
+        className={`group relative overflow-hidden block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400 ${
+          isLastOdd ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
+        }`}
+      >
+        {/* Follower Circle */}
+        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
+          <div
+            className="absolute w-48 h-48 bg-gray-400/40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-300"
+            style={{
+              transform: `translate(${mousePos.x - 96}px, ${mousePos.y - 96}px)`,
+            }}
+          />
+        </div>
+  
+        {/* Content */}
+        <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
+          {project.title}
+        </h3>
+        <p className="text-gray-400">{project.description}</p>
+      </motion.a>
+      );
+    })}
   </div>
 </section>
 
