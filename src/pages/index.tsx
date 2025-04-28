@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Head from "next/head";
@@ -34,16 +34,7 @@ export default function Home() {
   const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
     cardRefs.current[index] = el;
   };
- // Track mouse for each card
- const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
- const handleMouseMove = (e: React.MouseEvent<HTMLAnchorElement>) => {
-   const rect = e.currentTarget.getBoundingClientRect();
-   setMousePos({
-     x: e.clientX - rect.left,
-     y: e.clientY - rect.top,
-   });
- };
   useEffect(() => {
     window.scrollTo(0, 0);
     if (heroRef.current) {
@@ -385,35 +376,23 @@ export default function Home() {
       const isLastOdd = array.length % 2 === 1 && index === array.length - 1;
       return (
         <motion.a
-        key={index}
-        href={project.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
-        onMouseMove={handleMouseMove}
-        className={`group relative overflow-hidden block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400 ${
-          isLastOdd ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
-        }`}
-      >
-        {/* Follower Circle */}
-        <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-          <div
-            className="absolute w-48 h-48 bg-gray-400/40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-all duration-300"
-            style={{
-              transform: `translate(${mousePos.x - 96}px, ${mousePos.y - 96}px)`,
-            }}
-          />
-        </div>
-  
-        {/* Content */}
-        <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
-          {project.title}
-        </h3>
-        <p className="text-gray-400">{project.description}</p>
-      </motion.a>
+          key={index}
+          href={project.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
+          className={`group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400 ${
+            isLastOdd ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
+          }`}
+        >
+          <h3 className="text-2xl font-bold text-blue-300 mb-3 group-hover:-translate-y-1 transition-transform duration-300">
+            {project.title}
+          </h3>
+          <p className="text-gray-400">{project.description}</p>
+        </motion.a>
       );
     })}
   </div>
