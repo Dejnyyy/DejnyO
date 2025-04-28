@@ -319,7 +319,7 @@ export default function Home() {
           <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
           <h3 className="text-2xl font-bold text-blue-300 mb-2">Dejny</h3>
           <p className="text-gray-400 mb-2">Founder & Developer</p>
-          <p className="text-gray-500 text-sm mb-2 italic">"Building beats with code."</p>
+          <p className="text-gray-500 text-sm mb-2 italic">&quot;Building beats with code.&quot;</p>
           <p className="text-gray-500 text-xs">Leading the creative vision of DejnyO.</p>
         </div>
       </Tilt>
@@ -339,7 +339,7 @@ export default function Home() {
 
           <h3 className="text-2xl font-bold text-blue-300 mb-2">Oskkys</h3>
           <p className="text-gray-400 mb-2">Creative Partner</p>
-          <p className="text-gray-500 text-sm mb-2 italic">"Energy behind every idea."</p>
+          <p className="text-gray-500 text-sm mb-2 italic">&quot;Energy behind every idea.&quot;</p>
           <p className="text-gray-500 text-xs">Shaping the energy and feel of every project.</p>
         </div>
       </Tilt>
