@@ -41,46 +41,60 @@ export default function Home() {
       gsap.fromTo(heroRef.current, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 1.2 });
     }
   }, []);
-
-  // Services Section Animation
   useEffect(() => {
     if (!containerRef.current) return;
-
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: containerRef.current,
-        start: "top+=100 top",
-        end: "+=600",
-        scrub: true,
-        pin: true,
-      },
-    });
-
-    cardRefs.current.forEach((card, index) => {
-      if (card) {
-        tl.fromTo(
-          card,
-          {
-            opacity: 0,
-            y: 100,
-            rotate: index % 2 === 0 ? -5 : 5,
-          },
-          {
+  
+    const isMobile = window.innerWidth <= 768; // Mobile if screen is smaller than 768px
+  
+    if (isMobile) {
+      // 💥 No animations on mobile, cards are just static
+      cardRefs.current.forEach((card) => {
+        if (card) {
+          gsap.set(card, {
             opacity: 1,
             y: 0,
             rotate: 0,
-            duration: 1,
-          },
-          index * 0.2
-        );
-      }
-    });
-
-    return () => {
-      tl.kill();
-    };
+          });
+        }
+      });
+    } else {
+      // 🖥️ Desktop animation
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top+=100 top",
+          end: "+=600",
+          scrub: true,
+          pin: true,
+        },
+      });
+  
+      cardRefs.current.forEach((card, index) => {
+        if (card) {
+          tl.fromTo(
+            card,
+            {
+              opacity: 0,
+              y: 100,
+              rotate: index % 2 === 0 ? -5 : 5,
+            },
+            {
+              opacity: 1,
+              y: 0,
+              rotate: 0,
+              duration: 1,
+            },
+            index * 0.2
+          );
+        }
+      });
+  
+      return () => {
+        tl.kill();
+      };
+    }
   }, []);
-
+  
   // Parallax for DejnyO background text
   useEffect(() => {
     if (!dejnyoTextRef.current) return;
@@ -211,14 +225,14 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
-
-      {/* Services Section */}
       <section ref={containerRef} className="relative py-36 bg-black overflow-hidden">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12 relative">
-          <h2 className="text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
-            What We Create
-          </h2>
-          <div className="relative w-full h-[400px]">
+  <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12 relative">
+    <h2 className="text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+      What We Create
+    </h2>
+
+    {/* Desktop Layout */}
+    <div className="relative w-full h-[400px] hidden md:block">
       {services.map((service, index) => (
         <div
           key={index}
@@ -237,8 +251,25 @@ export default function Home() {
         </div>
       ))}
     </div>
+
+    {/* Mobile Layout */}
+    <div className="grid grid-cols-1 gap-8 md:hidden">
+      {services.map((service, index) => (
+        <div
+          key={index}
+          className="group bg-gradient-to-br from-gray-200/10 via-gray-300/10 to-gray-400/10 border border-gray-600 hover:border-blue-400 backdrop-blur-md rounded-3xl p-8 w-full shadow-md hover:scale-105 transition-all duration-500"
+        >
+          <div className="text-5xl mb-4">{service.icon}</div>
+          <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-400 group-hover:-translate-y-1 transition-transform duration-300">
+            {service.title}
+          </h3>
+          <p className="text-gray-400">{service.description}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
+
 
 
 {/* Offer Section - Updated Pricing Models */}
