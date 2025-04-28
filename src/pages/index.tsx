@@ -466,7 +466,6 @@ export default function Home() {
         Get a Quote
       </a>
     </div>
-
   </div>
 </section>
 
