@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import Head from "next/head";
@@ -30,6 +30,7 @@ export default function Home() {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const dejnyoTextRef = useRef<HTMLHeadingElement>(null);
+  const [theme, setTheme] = useState<"light" | "dark">("dark"); // 🌙/☀️ toggle
 
   const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
     cardRefs.current[index] = el;
@@ -133,9 +134,37 @@ export default function Home() {
     });
   };
 
+  // Update document body class for dark/light mode
+  useEffect(() => {
+    if (theme === "dark") {
+      document.body.classList.add("bg-black");
+      document.body.classList.remove("bg-white");
+    } else {
+      document.body.classList.add("bg-white");
+      document.body.classList.remove("bg-black");
+    }
+  }, [theme]);
+
   return (
-    <div className="bg-black text-white font-sans">
-      <Head>
+    <div className={`transition-colors duration-500 ${theme === "dark" ? "text-white" : "text-black"} font-sans`}>
+    <Head>
+      <title>DejnyO</title>
+      <meta name="description" content="DejnyO - Designing next-gen music-focused websites and apps with a punch of aesthetic graphics." />
+    </Head>
+
+    {/* 🌙☀️ Theme Toggle Button */}
+    <button
+      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className={`fixed top-6 right-6 z-50 ${theme === "dark" ? "bg-white/10 hover:bg-white/20" : "bg-black/40 hover:bg-black/60"} py-2  text-white dark:text-black backdrop-blur-md px-3 rounded-full transition-all`}
+    >
+      <span
+        className="inline-block transition-transform duration-500 ease-in-out"
+        style={{ transform: theme === "dark" ? "rotate(0deg)" : "rotate(180deg)" }}
+      >
+        {theme === "dark" ? "🌙" : "☀️"}
+      </span>
+    </button>
+    <Head>
         <title>DejnyO</title>
         <meta name="description" content="DejnyO - Designing next-gen music-focused websites and apps with a punch of aesthetic graphics." />
       </Head>
@@ -143,11 +172,11 @@ export default function Home() {
       {/* Searchbar */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
         <div className="relative p-[2px] rounded-full overflow-hidden gradient-border">
-          <div className="relative bg-gray-800/50 backdrop-blur-md rounded-full px-4 py-2">
+          <div className={`relative  ${theme === "dark" ? "bg-gray-800/50 text-white" : "bg-gray-300/40 text-black"} backdrop-blur-md rounded-full px-4 py-2`}>
             <input
               type="text"
               placeholder="Search..."
-              className="bg-transparent text-white placeholder-gray-300 outline-none"
+              className="bg-transparent  placeholder-gray-500 outline-none"
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
@@ -155,79 +184,121 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-<section ref={heroRef} className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden bg-black px-6">
+<section
+  ref={heroRef}
+  className={`relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden px-6 ${
+    theme === 'dark' ? 'bg-black' : 'bg-white'
+  }`}
+>
   {/* Blurred Animated Background */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
-  </div>
-{/* Particle background */}
-<div className="absolute inset-0 overflow-hidden pointer-events-none">
-  {Array.from({ length: 30 }).map((_, i) => (
     <div
-      key={i}
-      className="absolute w-1 h-1 bg-white/20 rounded-full animate-particle"
-      style={{
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        animationDuration: `${5 + Math.random() * 10}s`,
-        animationDelay: `${Math.random() * 4}s`,
-      }}
+      className={`absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 ${
+        theme === 'dark'
+          ? 'bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20'
+          : 'bg-gradient-to-br from-purple-400 via-pink-400 to-rose-400 opacity-20'
+      }`}
     />
-  ))}
-</div>
-<div className="absolute inset-0 bg-white/5 backdrop-blur-sm opacity-0" id="frost-layer" />
+  </div>
+
+  {/* Particle background */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    {Array.from({ length: 30 }).map((_, i) => (
+      <div
+        key={i}
+        className={`absolute w-1 h-1 rounded-full animate-particle ${
+          theme === 'dark' ? 'bg-white/30' : 'bg-black/20'
+        }`}
+        style={{
+          top: `${Math.random() * 100}%`,
+          left: `${Math.random() * 100}%`,
+          animationDuration: `${5 + Math.random() * 10}s`,
+          animationDelay: `${Math.random() * 4}s`,
+        }}
+      />
+    ))}
+  </div>
+
+  {/* Frost layer on scroll */}
+  <div className="absolute inset-0 bg-white/5 backdrop-blur-sm opacity-0" id="frost-layer" />
 
   {/* Foreground Hero Content */}
   <motion.h1
     initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 1.2 }}
-    className="text-6xl md:text-8xl font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500"
+    className={`text-6xl md:text-8xl font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r ${
+      theme === 'dark'
+        ? 'from-cyan-400 via-blue-400 to-indigo-400'
+        : 'from-purple-400 via-pink-400 to-rose-400'
+    }`}
   >
     DejnyO
   </motion.h1>
-  
 
   <motion.p
     initial={{ opacity: 0, y: 30 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ delay: 0.6, duration: 1 }}
-    className="text-xl md:text-2xl text-gray-300 max-w-2xl"
+    className={`text-xl md:text-2xl max-w-2xl ${
+      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+    }`}
   >
     Crafting immersive websites and apps with music, motion, and creativity.
   </motion.p>
 </section>
 
 
-      {/* About Section with Parallax DejnyO */}
-      <section className="relative py-32 px-6 max-w-7xl mx-auto overflow-hidden">
-        {/* Giant floating background text */}
-        <h2
-          ref={dejnyoTextRef}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 select-none whitespace-nowrap pointer-events-none opacity-20"
-        >
-          DejnyO
-        </h2>
-        {/* Foreground content */}
-        <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="mx-10"
-          >
-           <h3 className="text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
-           Who We Are</h3>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-      <section ref={containerRef} className="relative py-36 bg-black overflow-hidden">
+{/* About Section with Parallax DejnyO */}
+<section className={`relative py-32 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+  
+  {/* Giant floating background text */}
+  <h2
+    ref={dejnyoTextRef}
+    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
+      theme === 'dark'
+        ? 'from-cyan-400 via-blue-500 to-indigo-500'
+        : 'from-purple-400 via-pink-400 to-rose-400'
+    } select-none whitespace-nowrap pointer-events-none opacity-20`}
+  >
+    DejnyO
+  </h2>
+
+  {/* Foreground content */}
+  <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+      className="mx-10"
+    >
+      <h3 className={`text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r ${
+        theme === 'dark'
+          ? 'from-cyan-400 via-blue-400 to-indigo-400'
+          : 'from-purple-400 via-pink-400 to-rose-400'
+      }`}>
+        Who We Are
+      </h3>
+      
+      <p className={`text-lg leading-relaxed ${
+        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+      }`}>
+        DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
+      </p>
+    </motion.div>
+  </div>
+</section>
+
+      <section ref={containerRef} className={`relative py-36 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12 relative">
-    <h2 className="text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
+    
+    {/* Updated Title */}
+    <h2 className={`text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r ${
+      theme === 'dark'
+        ? 'from-cyan-400 via-blue-500 to-indigo-500'
+        : 'from-purple-400 via-pink-400 to-rose-400'
+    }`}>
       What We Create
     </h2>
 
@@ -237,17 +308,27 @@ export default function Home() {
         <div
           key={index}
           ref={setCardRef(index)}
-          className="absolute group bg-gradient-to-br from-gray-200/10 via-gray-300/10 to-gray-400/10 border border-gray-600 hover:border-blue-400 backdrop-blur-md rounded-3xl p-8 w-80 shadow-md hover:scale-105 hover:rotate-0 transition-all duration-500"
+          className={`absolute group rounded-3xl p-8 w-80 shadow-md hover:scale-105 hover:rotate-0 transition-all duration-500 border ${
+            theme === 'dark'
+              ? 'bg-gradient-to-tr from-gray-800/70 via-gray-700/70 to-gray-600/50 border-gray-700 hover:border-cyan-400'
+              : 'bg-gradient-to-tr from-gray-100 via-white to-gray-50 border-gray-200 hover:border-pink-400'
+          }`}
           style={{
             top: index === 0 ? '50px' : index === 1 ? '100px' : '200px',
             left: index === 0 ? '10%' : index === 1 ? '70%' : '40%',
           }}
         >
           <div className="text-5xl mb-4">{service.icon}</div>
-          <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-400 group-hover:-translate-y-1 transition-transform duration-300">
+          <h3 className={`text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r ${
+            theme === 'dark'
+              ? 'from-cyan-300 via-blue-400 to-indigo-400'
+              : 'from-purple-400 via-pink-400 to-rose-400'
+          } group-hover:-translate-y-1 transition-transform duration-300`}>
             {service.title}
           </h3>
-          <p className="text-gray-400">{service.description}</p>
+          <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+            {service.description}
+          </p>
         </div>
       ))}
     </div>
@@ -257,13 +338,23 @@ export default function Home() {
       {services.map((service, index) => (
         <div
           key={index}
-          className="group bg-gradient-to-br from-gray-200/10 via-gray-300/10 to-gray-400/10 border border-gray-600 hover:border-blue-400 backdrop-blur-md rounded-3xl p-8 w-full shadow-md hover:scale-105 transition-all duration-500"
+          className={`group rounded-3xl p-8 w-full shadow-md hover:scale-105 transition-all duration-500 border ${
+            theme === 'dark'
+              ? 'bg-gradient-to-br from-gray-800/70 via-gray-700/70 to-gray-600/50 border-gray-700 hover:border-cyan-400'
+              : 'bg-gradient-to-br from-gray-100 via-white to-gray-50 border-gray-200 hover:border-pink-400'
+          }`}
         >
           <div className="text-5xl mb-4">{service.icon}</div>
-          <h3 className="text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-300 via-cyan-300 to-blue-400 group-hover:-translate-y-1 transition-transform duration-300">
+          <h3 className={`text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r ${
+            theme === 'dark'
+              ? 'from-cyan-300 via-blue-400 to-indigo-400'
+              : 'from-purple-400 via-pink-400 to-rose-400'
+          } group-hover:-translate-y-1 transition-transform duration-300`}>
             {service.title}
           </h3>
-          <p className="text-gray-400">{service.description}</p>
+          <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+            {service.description}
+          </p>
         </div>
       ))}
     </div>
@@ -271,67 +362,119 @@ export default function Home() {
 </section>
 
 
-
 {/* Offer Section - Updated Pricing Models */}
-<section className="py-24 px-6 max-w-7xl mx-auto text-center">
-  <h2 className="text-5xl font-bold mb-16 text-blue-400">Need a Website?</h2>
+<section className={`py-24 px-6 max-w-7xl mx-auto text-center ${
+  theme === 'dark' ? 'bg-black' : 'bg-white'
+}`}>
+  <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r ${
+    theme === 'dark'
+      ? 'from-cyan-400 via-blue-500 to-indigo-500'
+      : 'from-purple-400 via-pink-400 to-rose-400'
+  }`}>
+    Need a Website?
+  </h2>
 
   <div className="grid md:grid-cols-3 gap-10 items-start">
+    
     {/* Basic Plan */}
-    <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 flex flex-col justify-between">
+    <div className={`p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 flex flex-col justify-between ${
+      theme === 'dark'
+        ? 'bg-white/5'
+        : 'bg-gray-100'
+    }`}>
       <div>
-        <h3 className="text-2xl font-bold text-blue-300 mb-2">Basic</h3>
-        <p className="text-3xl font-extrabold text-white mb-1">$10<span className="text-lg font-normal">/month</span></p>
-        <p className="text-gray-300 mb-6">
+        <h3 className={`text-2xl font-bold mb-2 ${
+          theme === 'dark' ? 'text-cyan-400' : 'text-pink-500'
+        }`}>
+          Basic
+        </h3>
+        <p className={`text-3xl font-extrabold mb-1 ${
+          theme === 'dark' ? 'text-white' : 'text-gray-800'
+        }`}>
+          $10<span className="text-lg font-normal">/month</span>
+        </p>
+        <p className={`mb-6 ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Starter package. Hosting, domain, security, and lifetime updates for different events and occasions.
         </p>
       </div>
       <a
         href="mailto:contact@dejnyo.com"
-        className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition"
+        className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition ${
+          theme === 'dark'
+            ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
+            : 'bg-pink-400 hover:bg-pink-500 text-white'
+        }`}
       >
         Subscribe
       </a>
     </div>
 
     {/* Pro Plan (Highlighted) */}
-    <div className="bg-gradient-to-br from-blue-600/60 hover:from-cyan-500/50 hover:via-blue-600/60 hover:to-cyan-700/50 via-cyan-500/50 to-blue-700/50 p-10 rounded-3xl shadow-2xl hover:scale-110 hover:shadow-blue-500/30 transition-all duration-500 flex flex-col justify-between transform md:-translate-y-6 border-2 border-blue-400">
+    <div className={`p-10 rounded-3xl shadow-2xl hover:scale-110 transition-all duration-500 flex flex-col justify-between transform md:-translate-y-6 border-2 ${
+      theme === 'dark'
+        ? 'bg-gradient-to-br from-blue-600/60 via-cyan-500/50 to-blue-700/50 border-cyan-400'
+        : 'bg-gradient-to-br from-pink-400 via-purple-400 to-rose-400 border-pink-400'
+    }`}>
       <div>
         <h3 className="text-3xl font-bold text-white mb-2">Pro</h3>
         <p className="text-4xl font-extrabold text-white mb-1">$99</p>
-        <p className="text-gray-200 mb-6">
+        <p className="text-white/80 mb-6">
           One-time payment. Professional custom site with SEO, unique animations, and branding polish.
         </p>
       </div>
       <a
         href="mailto:contact@dejnyo.com"
-        className="mt-6 inline-block bg-white hover:bg-gray-200 hover:scale-105 text-black font-bold py-2 px-6 rounded-full transition"
+        className="mt-6 inline-block bg-white hover:bg-gray-200 text-black font-bold py-2 px-6 rounded-full transition"
       >
         Get a Quote
       </a>
     </div>
 
     {/* Elite Plan */}
-    <div className="bg-white/5 backdrop-blur-md p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 flex flex-col justify-between">
+    <div className={`p-8 rounded-3xl shadow-2xl hover:scale-105 transition-all duration-500 flex flex-col justify-between ${
+      theme === 'dark'
+        ? 'bg-white/5'
+        : 'bg-gray-100'
+    }`}>
       <div>
-        <h3 className="text-2xl font-bold text-blue-300 mb-2">Elite</h3>
-        <p className="text-3xl font-extrabold text-white mb-1">$199</p>
-        <p className="text-gray-300 mb-6">
+        <h3 className={`text-2xl font-bold mb-2 ${
+          theme === 'dark' ? 'text-cyan-300' : 'text-pink-400'
+        }`}>
+          Elite
+        </h3>
+        <p className={`text-3xl font-extrabold mb-1 ${
+          theme === 'dark' ? 'text-white' : 'text-gray-800'
+        }`}>
+          $199
+        </p>
+        <p className={`mb-6 ${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Full custom solution. Web apps, e-commerce, interactive design — tailor-made to your needs.
         </p>
       </div>
       <a
         href="mailto:contact@dejnyo.com"
-        className="mt-6 inline-block bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full transition"
+        className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition ${
+          theme === 'dark'
+            ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
+            : 'bg-pink-400 hover:bg-pink-500 text-white'
+        }`}
       >
         Get a Quote
       </a>
     </div>
+
   </div>
 </section>
 
+
 {/* Our Team Section */}
-<section className="py-32 px-6 max-w-7xl mx-auto text-center">
+<section  className={`py-32 px-6 max-w-7xl mx-auto text-center ${
+    theme === 'dark' ? 'bg-black' : 'bg-white'
+  }`}>
   <h2 className="text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
     Our Team
   </h2>
@@ -379,7 +522,9 @@ export default function Home() {
 </section>
 
 {/* Our Work Section */}
-<section className="py-32 px-6 max-w-7xl mx-auto text-center">
+<section  className={`py-32 px-6 max-w-7xl mx-auto text-center ${
+    theme === 'dark' ? 'bg-black' : 'bg-white'
+  }`}>
   {/* Gradient Title */}
   <h2 className="text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500">
     Our Work
@@ -403,6 +548,7 @@ export default function Home() {
         href: "https://hearme.dejny.eu",
       },
       // 🔥 ADD MORE PROJECTS HERE
+
     ].map((project, index, array) => {
       const isLastOdd = array.length % 2 === 1 && index === array.length - 1;
       return (
@@ -415,7 +561,7 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.1 }}
-          className={`group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 border border-gray-700 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400 ${
+          className={`group block bg-gradient-to-br from-gray-900/80 via-gray-800/80 to-gray-700/60 rounded-2xl p-10 text-left transition-transform duration-300 hover:-translate-y-3 hover:border-blue-400 ${
             isLastOdd ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""
           }`}
         >
@@ -431,7 +577,9 @@ export default function Home() {
 
 
 {/* Contact Section */}
-<section className="py-36 px-6  mx-auto text-center relative overflow-hidden">
+<section className={`py-36 px-6 mx-auto text-center relative overflow-hidden ${
+    theme === 'dark' ? 'bg-black' : 'bg-white'
+  }`}>
   {/* Optional subtle background gradient */}
   <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/50 pointer-events-none"></div>
 
@@ -453,7 +601,9 @@ export default function Home() {
 
 
    {/* Footer */}
-<footer className="py-4 text-center text-sm text-gray-500 bg-black relative overflow-hidden">
+<footer  className={`py-4 text-center text-sm relative overflow-hidden ${
+    theme === 'dark' ? 'bg-black text-gray-500' : 'bg-white text-gray-700'
+  }`}>
   {/* Divider line */}
   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-11/12 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
   <motion.div
