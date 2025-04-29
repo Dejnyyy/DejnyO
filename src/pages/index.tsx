@@ -592,12 +592,12 @@ export default function Home() {
       ? 'from-blue-400 via-cyan-400 to-blue-500'
       : 'from-pink-400 via-pink-500 to-pink-400'
   }`}>
-    Let's Create Together
+    Let&apos;s Create Together
   </h2>
 
   {/* Contact Text */}
   <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} text-lg md:text-xl max-w-2xl mx-auto mb-12`}>
-    Your ideas deserve more than templates. Let's build something unforgettable — coded, crafted, and customized by DejnyO.
+    Your ideas deserve more than templates. Let&apos;s build something unforgettable — coded, crafted, and customized by DejnyO.
   </p>
 
   {/* Contact Button */}
