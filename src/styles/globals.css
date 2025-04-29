@@ -54,18 +54,33 @@ body {
 
 .animate-particle {
   animation: particle infinite ease-in-out;
-}
-@keyframes pulse-slow {
+}@keyframes pulse-slow-dark {
   0%, 100% {
     opacity: 1;
-    border-color: #60A5FA; /* Tailwind blue-400 */
+    border-color: #22d3ee; /* Tailwind cyan-400 */
   }
   50% {
     opacity: 0.8;
-    border-color: #3B82F6; /* Tailwind blue-500 */
+    border-color: #0ea5e9; /* Tailwind cyan-500 */
   }
 }
 
-.animate-pulse-slow {
-  animation: pulse-slow 3s ease-in-out infinite;
+@keyframes pulse-slow-light {
+  0%, 100% {
+    opacity: 1;
+    border-color: #f472b6; /* Tailwind pink-400 */
+  }
+  50% {
+    opacity: 0.8;
+    border-color: #ec4899; /* Tailwind pink-500 */
+  }
+}
+
+/* Utility classes */
+.animate-pulse-slow-dark {
+  animation: pulse-slow-dark 3s ease-in-out infinite;
+}
+
+.animate-pulse-slow-light {
+  animation: pulse-slow-light 3s ease-in-out infinite;
 }
