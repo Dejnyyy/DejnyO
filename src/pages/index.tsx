@@ -291,7 +291,7 @@ export default function Home() {
 </section>
 
       <section ref={containerRef} className={`relative py-36 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-  <div className="max-w-7xl mx-auto px-8 flex flex-col items-center gap-12 relative">
+  <div className="max-w-7xl mx-auto md:px-8 flex flex-col items-center gap-12 relative">
     
     {/* Updated Title */}
     <h2 className={`text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r ${
@@ -401,11 +401,11 @@ export default function Home() {
       </div>
       <a
         href="mailto:contact@dejnyo.com"
-        className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition ${
-          theme === 'dark'
-            ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
-            : 'bg-pink-400 hover:bg-pink-500 text-white'
-        }`}
+        className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition bg-gradient-to-r ${
+    theme === 'dark' 
+      ? 'from-cyan-400 via-blue-400 to-indigo-400 text-white' 
+      : 'from-pink-400 via-pink-500 to-rose-400 text-white'
+  } hover:scale-110`}
       >
         Subscribe
       </a>
@@ -426,7 +426,7 @@ export default function Home() {
       </div>
       <a
         href="mailto:contact@dejnyo.com"
-        className="mt-6 inline-block bg-white hover:bg-gray-200 text-black font-bold py-2 px-6 rounded-full transition"
+        className="mt-6 inline-block hover:scale-110 bg-white hover:bg-gray-200 text-black font-bold py-2 px-6 rounded-full transition"
       >
         Get a Quote
       </a>
@@ -457,11 +457,11 @@ export default function Home() {
       </div>
       <a
         href="mailto:contact@dejnyo.com"
-        className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition ${
-          theme === 'dark'
-            ? 'bg-cyan-500 hover:bg-cyan-600 text-white'
-            : 'bg-pink-400 hover:bg-pink-500 text-white'
-        }`}
+        className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition bg-gradient-to-r ${
+    theme === 'dark' 
+      ? 'from-cyan-400 via-blue-400 to-indigo-400 text-white' 
+      : 'from-pink-400 via-pink-500 to-rose-400 text-white'
+  } hover:scale-110` }
       >
         Get a Quote
       </a>
@@ -487,9 +487,10 @@ export default function Home() {
             theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400' : 'animate-pulse-slow-light border-pink-400'
           }`}>
           <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
-          <h3 className={`text-2xl font-bold mb-2 ${
-            theme === 'dark' ? 'text-cyan-300' : 'text-pink-400'
-          }`}>Dejny</h3>
+          <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
+    'from-cyan-400 via-blue-500 to-indigo-500' :
+     'from-purple-400 via-pink-400 to-rose-400'
+     }`}>Dejny</h3>
           <p className="text-gray-400 mb-2">Founder & Developer</p>
         </div>
       </Tilt>
@@ -502,9 +503,10 @@ export default function Home() {
       theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400' : 'animate-pulse-slow-light border-pink-400'
     }`}>
    <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
-          <h3 className={`text-2xl font-bold mb-2 ${
-            theme === 'dark' ? 'text-cyan-300' : 'text-pink-400'
-          }`}>Oskkys</h3>
+          <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
+    'from-cyan-400 via-blue-500 to-indigo-500' :
+     'from-purple-400 via-pink-400 to-rose-400'
+     }`}>Oskkys</h3>
           <p className="text-gray-400 mb-2">Creative Partner</p>
         </div>
       </Tilt>
@@ -516,7 +518,10 @@ export default function Home() {
 <section className={`py-32 px-6 max-w-7xl mx-auto text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   {/* Section Title */}
   <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r 
-    ${theme === 'dark' ? 'from-cyan-400 via-blue-400 to-cyan-500' : 'from-pink-400 via-pink-500 to-pink-400'}`}>
+    ${theme === 'dark' ? 
+    'from-cyan-400 via-blue-500 to-indigo-500' :
+     'from-purple-400 via-pink-400 to-rose-400'
+     }`}>
     Our Work
   </h2>
 
@@ -560,8 +565,8 @@ export default function Home() {
         >
           <h3 className={`text-2xl font-bold mb-3 group-hover:-translate-y-1 transition-transform duration-300
             ${theme === 'dark'
-              ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500'
-              : 'text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-pink-500 to-pink-400'
+             ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500'
+          : ' text-transparent bg-clip-text bg-gradient-to-r  from-purple-400 via-pink-400 to-rose-400'
             }`}>
             {project.title}
           </h3>
@@ -589,8 +594,8 @@ export default function Home() {
   {/* Contact Title */}
   <h2 className={`text-5xl md:text-6xl font-extrabold mb-8 py-2 text-transparent bg-clip-text bg-gradient-to-r ${
     theme === 'dark'
-      ? 'from-blue-400 via-cyan-400 to-blue-500'
-      : 'from-pink-400 via-pink-500 to-pink-400'
+     ? 'bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600'
+          : 'bg-gradient-to-br from-purple-400 via-pink-400 to-rose-400'
   }`}>
     Let&apos;s Create Together
   </h2>
@@ -605,8 +610,8 @@ export default function Home() {
     href="mailto:contact@dejnyo.com"
     className={`inline-block font-bold py-4 px-10 rounded-full shadow-xl hover:scale-105 transition-transform duration-300
       ${theme === 'dark'
-        ? 'bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 text-black'
-        : 'bg-gradient-to-r from-pink-400 via-pink-500 to-pink-400 text-white'
+       ? 'bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600'
+          : 'bg-gradient-to-br from-purple-400 via-pink-400 to-rose-400'
     }`}
   >
     contact@dejnyo.com
@@ -628,10 +633,10 @@ export default function Home() {
     className="relative z-10"
   >
     <p className={`text-transparent bg-clip-text bg-gradient-to-r ${
-      theme === 'dark'
-        ? 'from-blue-400 via-cyan-400 to-blue-500'
-        : 'from-pink-400 via-pink-500 to-pink-400'
-    } mb-1`}>
+    theme === 'dark' 
+      ? 'from-cyan-400 via-blue-400 to-indigo-400' 
+      : 'from-pink-400 via-pink-500 to-rose-400'
+  } mb-1`}>
       © {new Date().getFullYear()} DejnyO
     </p>
   </motion.div>
