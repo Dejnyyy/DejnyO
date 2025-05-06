@@ -506,7 +506,7 @@ export default function Home() {
           <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
     'from-cyan-400 via-blue-500 to-indigo-500' :
      'from-purple-400 via-pink-400 to-rose-400'
-     }`}>Oskkys</h3>
+     }`}>Oskar</h3>
           <p className="text-gray-400 mb-2">Creative Partner</p>
         </div>
       </Tilt>
