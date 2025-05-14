@@ -363,7 +363,7 @@ export default function Home() {
 
 
 {/* Offer Section - Updated Pricing Models */}
-<section className={`py-24 px-6 max-w-7xl mx-auto text-center ${
+<section className={`py-24 px-6 w-full  text-center ${
   theme === 'dark' ? 'bg-black' : 'bg-white'
 }`}>
   <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r ${
@@ -470,7 +470,7 @@ export default function Home() {
 </section>
 
 {/* Our Team Section */}
-<section className={`py-32 px-6 max-w-7xl mx-auto text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+<section className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
       ? 'from-cyan-400 via-blue-400 to-indigo-400' 
@@ -515,7 +515,7 @@ export default function Home() {
 </section>
 
 {/* Our Work Section */}
-<section className={`py-32 px-6 max-w-7xl mx-auto text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+<section className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   {/* Section Title */}
   <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r 
     ${theme === 'dark' ? 
@@ -578,6 +578,7 @@ export default function Home() {
     })}
   </div>
 </section>
+
 {/* Contact Section */}
 <section className={`py-36 px-6 mx-auto text-center relative overflow-hidden ${
   theme === 'dark' ? 'bg-black' : 'bg-white'
@@ -586,8 +587,8 @@ export default function Home() {
   <div className="absolute inset-0 pointer-events-none">
     <div className={`w-full h-full bg-gradient-to-b ${
       theme === 'dark'
-        ? 'from-transparent to-gray-900/60'
-        : 'from-transparent to-pink-100/50'
+        ? 'from-transparent to-blue-900/60'
+        : 'from-transparent to-pink-300/80'
     }`} />
   </div>
 
@@ -602,7 +603,7 @@ export default function Home() {
 
   {/* Contact Text */}
   <p className={`${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} text-lg md:text-xl max-w-2xl mx-auto mb-12`}>
-    Your ideas deserve more than templates. Let&apos;s build something unforgettable — coded, crafted, and customized by DejnyO.
+    Your ideas deserve more! Let&apos;s build something unforgettable — coded, crafted, and customized by DejnyO.
   </p>
 
   {/* Contact Button */}
@@ -622,7 +623,9 @@ export default function Home() {
   theme === 'dark' ? 'bg-black text-gray-500' : 'bg-white text-gray-700'
 }`}>
   {/* Divider Line */}
-  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-11/12 h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent" />
+  <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-11/12 h-px bg-gradient-to-r from-transparent  to-transparent ${
+  theme === 'dark' ? ' via-blue-700' : ' via-pink-700'
+}`} />
 
   {/* Footer Text */}
   <motion.div
