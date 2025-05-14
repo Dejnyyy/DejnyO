@@ -273,7 +273,7 @@ export default function Home() {
       viewport={{ once: true }}
       className="mx-10"
     >
-      <h3 className={`text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r ${
+      <h3 className={`text-4xl font-bold mb-6 lg:w-2/3 xl:w-1/2 text-transparent bg-clip-text bg-gradient-to-r ${
         theme === 'dark'
           ? 'from-cyan-400 via-blue-400 to-indigo-400'
           : 'from-purple-400 via-pink-400 to-rose-400'
@@ -471,9 +471,9 @@ export default function Home() {
 
 {/* Our Team Section */}
 <section className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-  <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r ${
+  <h2 className={`text-5xl font-bold mb-16 text-transparent lg:w-1/5 mx-auto bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
-      ? 'from-cyan-400 via-blue-400 to-indigo-400' 
+      ? 'from-cyan-400 via-blue-500 to-indigo-500' 
       : 'from-pink-400 via-pink-500 to-rose-400'
   }`}>
     Our Team
@@ -517,7 +517,7 @@ export default function Home() {
 {/* Our Work Section */}
 <section className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   {/* Section Title */}
-  <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r 
+  <h2 className={`text-5xl font-bold mb-16 lg:w-1/5 mx-auto text-transparent bg-clip-text bg-gradient-to-r 
     ${theme === 'dark' ? 
     'from-cyan-400 via-blue-500 to-indigo-500' :
      'from-purple-400 via-pink-400 to-rose-400'
@@ -587,8 +587,8 @@ export default function Home() {
   <div className="absolute inset-0 pointer-events-none">
     <div className={`w-full h-full bg-gradient-to-b ${
       theme === 'dark'
-        ? 'from-transparent to-blue-900/60'
-        : 'from-transparent to-pink-300/80'
+        ? 'from-transparent via-transparent to-blue-900/60'
+        : 'from-transparent via-transparent to-pink-300/80'
     }`} />
   </div>
 
