@@ -4,7 +4,7 @@ import { Home, Laptop, DollarSign, Users, Mail } from 'lucide-react';
 
 export default function Navbar({ theme }: { theme: 'dark' | 'light' }) {
   const gradient = theme === 'dark'
-    ? 'from-cyan-400 via-blue-500 to-indigo-500'
+    ? 'from-cyan-400 via-blue-500 to-purple-500'
     : 'from-purple-400 via-pink-400 to-rose-400';
 
   const bg = theme === 'dark'
