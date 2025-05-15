@@ -146,7 +146,9 @@ export default function Home() {
       document.body.classList.remove("bg-black");
     }
   }, [theme]);
-
+  useEffect(() => {
+    document.body.style.backgroundColor = theme === 'dark' ? '#000000' : '#ffffff';
+  }, [theme]);
   return (
     <div className={`transition-colors duration-500 ${theme === "dark" ? "text-white" : "text-black"} font-sans`}>
     <Head>
