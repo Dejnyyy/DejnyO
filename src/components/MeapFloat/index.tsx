@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-type Zone = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'center';
+type Zone = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
 interface MeapPos {
   x: number;
@@ -24,7 +24,6 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
       { x: w - size, y: 40, zone: 'top-right' },
       { x: 0, y: h - size -40, zone: 'bottom-left' },
       { x: w - size, y: h - size -40, zone: 'bottom-right' },
-      { x: w / 2 - size / 2, y: h / 2 - size / 2, zone: 'center' },
     ];
   };
 
@@ -38,8 +37,6 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
         return 25;
       case 'bottom-right':
         return -25;
-      case 'center':
-        return 0;
       default:
         return 0;
     }
