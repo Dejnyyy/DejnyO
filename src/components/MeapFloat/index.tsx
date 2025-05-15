@@ -9,7 +9,7 @@ interface MeapPos {
   zone: Zone;
 }
 
-export default function SmartTiltMeap() {
+export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
   const [pos, setPos] = useState<MeapPos>({ x: 0, y: 0, zone: 'bottom-left' });
   const [angle, setAngle] = useState(-25);
   const meapRef = useRef<HTMLDivElement>(null);
@@ -82,8 +82,8 @@ export default function SmartTiltMeap() {
       }}
     >
       <img
-        src="/meap/nobgblink.png"
-        alt="Meap"
+        src={theme === 'dark' ? '/meap/nobgblink.png' : '/meap/idlemeap.png'}       
+         alt="Meap"
         className="w-full h-full object-contain animate-float"
       />
     </div>

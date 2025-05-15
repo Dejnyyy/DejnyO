@@ -5,6 +5,7 @@ import Head from "next/head";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Tilt from 'react-parallax-tilt';
 import MeapFloat from "@/components/MeapFloat";
+import Navbar from '@/components/NavBar';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -152,7 +153,8 @@ export default function Home() {
       <title>DejnyO</title>
       <meta name="description" content="DejnyO - Designing next-gen music-focused websites and apps with a punch of aesthetic graphics." />
     </Head>
-    <MeapFloat />
+
+    <MeapFloat theme={theme} />
 
     {/* 🌙☀️ Theme Toggle Button */}
     <button
@@ -166,10 +168,7 @@ export default function Home() {
         {theme === "dark" ? "🌙" : "☀️"}
       </span>
     </button>
-    <Head>
-        <title>DejnyO</title>
-        <meta name="description" content="DejnyO - Designing next-gen music-focused websites and apps with a punch of aesthetic graphics." />
-      </Head>
+      <Navbar theme={theme} />
 
       {/* Searchbar */}
       <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50">
@@ -292,7 +291,7 @@ export default function Home() {
   </div>
 </section>
 
-      <section ref={containerRef} className={`relative py-36 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+  <section ref={containerRef} id="about" className={`relative py-36 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <div className="max-w-7xl mx-auto md:px-8 flex flex-col items-center gap-12 relative">
     
     {/* Updated Title */}
@@ -312,8 +311,8 @@ export default function Home() {
           ref={setCardRef(index)}
           className={`absolute group rounded-3xl p-8 w-80 shadow-md hover:scale-105 hover:rotate-0 transition-all duration-500 border ${
             theme === 'dark'
-              ? 'bg-gradient-to-tr from-gray-800/70 via-gray-700/70 to-gray-600/50 border-gray-700 hover:border-cyan-400'
-              : 'bg-gradient-to-tr from-gray-100 via-white to-gray-50 border-gray-200 hover:border-pink-400'
+              ? 'bg-gradient-to-tr from-gray-900/70 via-gray-800/70 to-gray-600/50 border-gray-700 hover:border-cyan-400'
+              : 'bg-gradient-to-tr from-gray-300 via-white to-white border-gray-200 hover:border-pink-400'
           }`}
           style={{
             top: index === 0 ? '50px' : index === 1 ? '100px' : '200px',
@@ -365,7 +364,7 @@ export default function Home() {
 
 
 {/* Offer Section - Updated Pricing Models */}
-<section className={`py-24 px-6 w-full  text-center ${
+<section id="offer" className={`py-24 px-6 w-full  text-center ${
   theme === 'dark' ? 'bg-black' : 'bg-white'
 }`}>
   <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r ${
@@ -472,7 +471,7 @@ export default function Home() {
 </section>
 
 {/* Our Team Section */}
-<section className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+<section id="team" className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <h2 className={`text-5xl font-bold mb-16 text-transparent lg:w-1/5 mx-auto bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
       ? 'from-cyan-400 via-blue-500 to-indigo-500' 
@@ -485,14 +484,14 @@ export default function Home() {
     {/* Team Member 1 */}
     <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut" }}>
       <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.02} tiltMaxAngleX={10} tiltMaxAngleY={10}>
-      <div className={`group relative p-8 rounded-3xl shadow-2xl border-2 backdrop-blur-md overflow-hidden hover:scale-105 transition-all duration-500 ${
-            theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400' : 'animate-pulse-slow-light border-pink-400'
-          }`}>
-          <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
+      <div className={`group relative p-8 rounded-3xl shadow-2xl border-2 bg-gradient-to-tr  backdrop-blur-md overflow-hidden hover:scale-105 transition-all duration-500 ${
+      theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400  from-cyan-400/40 via-transparent to-black ' : 'animate-pulse-slow-light border-pink-400 from-pink-400/40 via-transparent to-white'
+      }`}>
+          <div className={`absolute top-0 left-[-75%] w-[50%] h-full ${theme === "dark" ? "bg-white/20":"bg-gray-300/30"} transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl`}></div>
           <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
-    'from-cyan-400 via-blue-500 to-indigo-500' :
-     'from-purple-400 via-pink-400 to-rose-400'
-     }`}>Dejny</h3>
+            'from-cyan-400 via-blue-500 to-indigo-500' :
+          'from-purple-400 via-pink-400 to-rose-400'
+          }`}>Dejny</h3>
           <p className="text-gray-400 mb-2">Founder & Developer</p>
         </div>
       </Tilt>
@@ -501,10 +500,10 @@ export default function Home() {
     {/* Team Member 2 */}
     <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}>
       <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.02} tiltMaxAngleX={10} tiltMaxAngleY={10}>
-      <div className={`group relative p-8 rounded-3xl shadow-2xl border-2 backdrop-blur-md overflow-hidden hover:scale-105 transition-all duration-500 ${
-      theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400' : 'animate-pulse-slow-light border-pink-400'
+      <div className={`group relative p-8 rounded-3xl shadow-2xl border-2 backdrop-blur-md overflow-hidden bg-gradient-to-tl hover:scale-105 transition-all duration-500 ${
+      theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400  from-cyan-400/40 via-transparent to-black ' : 'animate-pulse-slow-light border-pink-400 from-pink-400/40 via-transparent to-white'
     }`}>
-   <div className="absolute top-0 left-[-75%] w-[50%] h-full bg-white/20 transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl"></div>
+          <div className={`absolute top-0 left-[-75%] w-[50%] h-full ${theme === "dark" ? "bg-white/20":"bg-gray-300/30"} transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl`}></div>
           <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
     'from-cyan-400 via-blue-500 to-indigo-500' :
      'from-purple-400 via-pink-400 to-rose-400'
@@ -582,7 +581,7 @@ export default function Home() {
 </section>
 
 {/* Contact Section */}
-<section className={`py-36 px-6 mx-auto text-center relative overflow-hidden ${
+<section id="contact" className={`py-36 px-6 mx-auto text-center relative overflow-hidden ${
   theme === 'dark' ? 'bg-black' : 'bg-white'
 }`}>
   {/* Background Gradient */}
@@ -621,8 +620,8 @@ export default function Home() {
   </a>
 </section>
 {/* Footer */}
-<footer className={`py-4 text-center text-sm relative overflow-hidden ${
-  theme === 'dark' ? 'bg-black text-gray-500' : 'bg-white text-gray-700'
+<footer className={`py-4 text-center bg-gradient-to-b pt-5 text-sm relative overflow-hidden ${
+  theme === 'dark' ? 'bg-black text-gray-500 from-blue-600/50 to-black' : 'bg-white text-gray-700  from-pink-400/50 to-white '
 }`}>
   {/* Divider Line */}
   <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-11/12 h-px bg-gradient-to-r from-transparent  to-transparent ${
@@ -640,7 +639,7 @@ export default function Home() {
     <p className={`text-transparent bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
       ? 'from-cyan-400 via-blue-400 to-indigo-400' 
-      : 'from-pink-400 via-pink-500 to-rose-400'
+      : ' from-pink-400 via-pink-500 to-rose-400'
   } mb-1`}>
       © {new Date().getFullYear()} DejnyO
     </p>
