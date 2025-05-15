@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import gsap from "gsap";
 import Head from "next/head";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Tilt from 'react-parallax-tilt';
 import MeapFloat from "@/components/MeapFloat";
 import Navbar from '@/components/NavBar';
+import { FlipCard } from "@/components/FlipCard";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -484,36 +484,20 @@ export default function Home() {
 
   <div className="grid md:grid-cols-2 gap-10">
     {/* Team Member 1 */}
-    <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut" }}>
-      <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.02} tiltMaxAngleX={10} tiltMaxAngleY={10}>
-      <div className={`group relative p-8 rounded-3xl shadow-2xl border-2 bg-gradient-to-tr  backdrop-blur-md overflow-hidden hover:scale-105 transition-all duration-500 ${
-      theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400  from-cyan-400/40 via-transparent to-black ' : 'animate-pulse-slow-light border-pink-400 from-pink-400/40 via-transparent to-white'
-      }`}>
-          <div className={`absolute top-0 left-[-75%] w-[50%] h-full ${theme === "dark" ? "bg-white/20":"bg-gray-300/30"} transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl`}></div>
-          <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
-            'from-cyan-400 via-blue-500 to-purple-500' :
-          'from-purple-400 via-pink-400 to-rose-400'
-          }`}>Dejny</h3>
-          <p className="text-gray-400 mb-2">Founder & Developer</p>
-        </div>
-      </Tilt>
-    </motion.div>
+    <FlipCard
+      name="Dejny"
+      role="Founder & Developer"
+      image="/dejny.png"
+      theme={theme}
+    />
 
     {/* Team Member 2 */}
-    <motion.div initial={{ opacity: 0, y: 60 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}>
-      <Tilt glareEnable={true} glareMaxOpacity={0.2} scale={1.02} tiltMaxAngleX={10} tiltMaxAngleY={10}>
-      <div className={`group relative p-8 rounded-3xl shadow-2xl border-2 backdrop-blur-md overflow-hidden bg-gradient-to-tl hover:scale-105 transition-all duration-500 ${
-      theme === 'dark' ? 'animate-pulse-slow-dark border-cyan-400  from-cyan-400/40 via-transparent to-black ' : 'animate-pulse-slow-light border-pink-400 from-pink-400/40 via-transparent to-white'
-    }`}>
-          <div className={`absolute top-0 left-[-75%] w-[50%] h-full ${theme === "dark" ? "bg-white/20":"bg-gray-300/30"} transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl`}></div>
-          <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
-    'from-cyan-400 via-blue-500 to-purple-500' :
-     'from-purple-400 via-pink-400 to-rose-400'
-     }`}>Oskar</h3>
-          <p className="text-gray-400 mb-2">Creative Partner</p>
-        </div>
-      </Tilt>
-    </motion.div>
+    <FlipCard
+      name="Oskar"
+      role="Creative Partner"
+      image="/oskar.png"
+      theme={theme}
+    />
   </div>
 </section>
 
