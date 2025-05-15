@@ -20,10 +20,10 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
     const size = 96;
 
     return [
-      { x: 0, y: 0, zone: 'top-left' },
-      { x: w - size, y: 0, zone: 'top-right' },
-      { x: 0, y: h - size, zone: 'bottom-left' },
-      { x: w - size, y: h - size, zone: 'bottom-right' },
+      { x: 0, y: 40, zone: 'top-left' },
+      { x: w - size, y: 40, zone: 'top-right' },
+      { x: 0, y: h - size -40, zone: 'bottom-left' },
+      { x: w - size, y: h - size -40, zone: 'bottom-right' },
       { x: w / 2 - size / 2, y: h / 2 - size / 2, zone: 'center' },
     ];
   };

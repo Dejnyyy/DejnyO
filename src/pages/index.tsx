@@ -228,9 +228,9 @@ export default function Home() {
     initial={{ opacity: 0, scale: 0.9 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 1.2 }}
-    className={`text-6xl md:text-8xl font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r ${
+    className={`text-6xl md:text-8xl w-auto font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r ${
       theme === 'dark'
-        ? 'from-cyan-400 via-blue-400 to-indigo-400'
+        ? 'from-cyan-400 via-blue-400 to-purple-500'
         : 'from-purple-400 via-pink-400 to-rose-400'
     }`}
   >
@@ -258,7 +258,7 @@ export default function Home() {
     ref={dejnyoTextRef}
     className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
       theme === 'dark'
-        ? 'from-cyan-400 via-blue-500 to-indigo-500'
+        ? 'from-cyan-400 via-blue-500 to-purple-500'
         : 'from-purple-400 via-pink-400 to-rose-400'
     } select-none whitespace-nowrap pointer-events-none opacity-20`}
   >
@@ -276,7 +276,7 @@ export default function Home() {
     >
       <h3 className={`text-4xl font-bold mb-6 lg:w-2/3 xl:w-1/2 text-transparent bg-clip-text bg-gradient-to-r ${
         theme === 'dark'
-          ? 'from-cyan-400 via-blue-400 to-indigo-400'
+          ? 'from-cyan-400 via-blue-400 to-purple-400'
           : 'from-purple-400 via-pink-400 to-rose-400'
       }`}>
         Who We Are
@@ -297,7 +297,7 @@ export default function Home() {
     {/* Updated Title */}
     <h2 className={`text-6xl font-extrabold text-center mb-4 text-transparent bg-clip-text bg-gradient-to-r ${
       theme === 'dark'
-        ? 'from-cyan-400 via-blue-500 to-indigo-500'
+        ? 'from-cyan-400 via-blue-500 to-purple-500'
         : 'from-purple-400 via-pink-400 to-rose-400'
     }`}>
       What We Create
@@ -322,7 +322,7 @@ export default function Home() {
           <div className="text-5xl mb-4">{service.icon}</div>
           <h3 className={`text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r ${
             theme === 'dark'
-              ? 'from-cyan-300 via-blue-400 to-indigo-400'
+              ? 'from-cyan-300 via-blue-400 to-purple-400'
               : 'from-purple-400 via-pink-400 to-rose-400'
           } group-hover:-translate-y-1 transition-transform duration-300`}>
             {service.title}
@@ -348,7 +348,7 @@ export default function Home() {
           <div className="text-5xl mb-4">{service.icon}</div>
           <h3 className={`text-2xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r ${
             theme === 'dark'
-              ? 'from-cyan-300 via-blue-400 to-indigo-400'
+              ? 'from-cyan-300 via-blue-400 to-purple-400'
               : 'from-purple-400 via-pink-400 to-rose-400'
           } group-hover:-translate-y-1 transition-transform duration-300`}>
             {service.title}
@@ -364,12 +364,12 @@ export default function Home() {
 
 
 {/* Offer Section - Updated Pricing Models */}
-<section id="offer" className={`py-24 px-6 w-full  text-center ${
+<section id="offer" className={`py-24 px-6 w-full text-center ${
   theme === 'dark' ? 'bg-black' : 'bg-white'
 }`}>
-  <h2 className={`text-5xl font-bold mb-16 text-transparent bg-clip-text bg-gradient-to-r ${
+  <h2 className={`text-5xl font-bold mb-16 lg:w-1/2 mx-auto text-transparent bg-clip-text bg-gradient-to-r ${
     theme === 'dark'
-      ? 'from-cyan-400 via-blue-500 to-indigo-500'
+      ? 'from-cyan-400 via-blue-500 to-purple-500'
       : 'from-purple-400 via-pink-400 to-rose-400'
   }`}>
     Need a Website?
@@ -404,7 +404,7 @@ export default function Home() {
         href="mailto:contact@dejnyo.com"
         className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition bg-gradient-to-r ${
     theme === 'dark' 
-      ? 'from-cyan-400 via-blue-400 to-indigo-400 text-white' 
+      ? 'from-cyan-400 via-blue-400 to-purple-400 text-white' 
       : 'from-pink-400 via-pink-500 to-rose-400 text-white'
   } hover:scale-110`}
       >
@@ -460,7 +460,7 @@ export default function Home() {
         href="mailto:contact@dejnyo.com"
         className={`mt-6 inline-block font-bold py-2 px-6 rounded-full transition bg-gradient-to-r ${
     theme === 'dark' 
-      ? 'from-cyan-400 via-blue-400 to-indigo-400 text-white' 
+      ? 'from-cyan-400 via-blue-400 to-purple-400 text-white' 
       : 'from-pink-400 via-pink-500 to-rose-400 text-white'
   } hover:scale-110` }
       >
@@ -474,7 +474,7 @@ export default function Home() {
 <section id="team" className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <h2 className={`text-5xl font-bold mb-16 text-transparent lg:w-1/5 mx-auto bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
-      ? 'from-cyan-400 via-blue-500 to-indigo-500' 
+      ? 'from-cyan-400 via-blue-500 to-purple-500' 
       : 'from-pink-400 via-pink-500 to-rose-400'
   }`}>
     Our Team
@@ -489,7 +489,7 @@ export default function Home() {
       }`}>
           <div className={`absolute top-0 left-[-75%] w-[50%] h-full ${theme === "dark" ? "bg-white/20":"bg-gray-300/30"} transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl`}></div>
           <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
-            'from-cyan-400 via-blue-500 to-indigo-500' :
+            'from-cyan-400 via-blue-500 to-purple-500' :
           'from-purple-400 via-pink-400 to-rose-400'
           }`}>Dejny</h3>
           <p className="text-gray-400 mb-2">Founder & Developer</p>
@@ -505,7 +505,7 @@ export default function Home() {
     }`}>
           <div className={`absolute top-0 left-[-75%] w-[50%] h-full ${theme === "dark" ? "bg-white/20":"bg-gray-300/30"} transform skew-x-[-30deg] group-hover:left-[125%] transition-all duration-500 ease-in-out rounded-3xl`}></div>
           <h3 className={`text-2xl font-bold mb-2   ${theme === 'dark' ? 
-    'from-cyan-400 via-blue-500 to-indigo-500' :
+    'from-cyan-400 via-blue-500 to-purple-500' :
      'from-purple-400 via-pink-400 to-rose-400'
      }`}>Oskar</h3>
           <p className="text-gray-400 mb-2">Creative Partner</p>
@@ -520,7 +520,7 @@ export default function Home() {
   {/* Section Title */}
   <h2 className={`text-5xl font-bold mb-16 lg:w-1/5 mx-auto text-transparent bg-clip-text bg-gradient-to-r 
     ${theme === 'dark' ? 
-    'from-cyan-400 via-blue-500 to-indigo-500' :
+    'from-cyan-400 via-blue-500 to-purple-500' :
      'from-purple-400 via-pink-400 to-rose-400'
      }`}>
     Our Work
@@ -566,7 +566,7 @@ export default function Home() {
         >
           <h3 className={`text-2xl font-bold mb-3 group-hover:-translate-y-1 transition-transform duration-300
             ${theme === 'dark'
-             ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500'
+             ? 'text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500'
           : ' text-transparent bg-clip-text bg-gradient-to-r  from-purple-400 via-pink-400 to-rose-400'
             }`}>
             {project.title}
@@ -638,7 +638,7 @@ export default function Home() {
   >
     <p className={`text-transparent bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
-      ? 'from-cyan-400 via-blue-400 to-indigo-400' 
+      ? 'from-cyan-400 via-blue-400 to-purple-400' 
       : ' from-pink-400 via-pink-500 to-rose-400'
   } mb-1`}>
       © {new Date().getFullYear()} DejnyO
