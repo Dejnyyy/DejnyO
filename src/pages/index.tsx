@@ -4,6 +4,7 @@ import gsap from "gsap";
 import Head from "next/head";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Tilt from 'react-parallax-tilt';
+import MeapFloat from "@/components/MeapFloat";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -151,6 +152,7 @@ export default function Home() {
       <title>DejnyO</title>
       <meta name="description" content="DejnyO - Designing next-gen music-focused websites and apps with a punch of aesthetic graphics." />
     </Head>
+    <MeapFloat />
 
     {/* 🌙☀️ Theme Toggle Button */}
     <button
