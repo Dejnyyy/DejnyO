@@ -12,6 +12,7 @@ interface MeapPos {
 export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
   const [pos, setPos] = useState<MeapPos>({ x: 0, y: 0, zone: 'bottom-left' });
   const [angle, setAngle] = useState(-25);
+  const [hovering, setHovering] = useState(false);
   const meapRef = useRef<HTMLDivElement>(null);
 
   const getPositions = (): MeapPos[] => {
@@ -22,8 +23,8 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
     return [
       { x: 0, y: 40, zone: 'top-left' },
       { x: w - size, y: 40, zone: 'top-right' },
-      { x: 0, y: h - size -40, zone: 'bottom-left' },
-      { x: w - size, y: h - size -40, zone: 'bottom-right' },
+      { x: 0, y: h - size-40, zone: 'bottom-left' },
+      { x: w - size, y: h - size-40, zone: 'bottom-right' },
     ];
   };
 
@@ -41,18 +42,32 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
         return 0;
     }
   };
-
+  const getTooltipPosition = (zone: Zone) => {
+    switch (zone) {
+      case 'top-left':
+        return 'top-full left-full';
+      case 'top-right':
+        return 'top-full right-full';
+      case 'bottom-left':
+        return 'bottom-full left-full';
+      case 'bottom-right':
+        return 'bottom-full right-full';
+      default:
+        return 'top-full left-1/2 -translate-x-1/2';
+    }
+  };
+  
   useEffect(() => {
     const update = () => {
       const options = getPositions();
       const next = options[Math.floor(Math.random() * options.length)];
       const rot = getRotationForZone(next.zone);
 
-      setAngle(rot);
       setPos(next);
+      setAngle(rot);
     };
 
-    update(); // initial
+    update();
     const interval = setInterval(update, 4000);
     window.addEventListener('resize', update);
 
@@ -64,25 +79,47 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
 
   return (
     <div
+    style={{
+      position: 'fixed',
+      left: pos.x,
+      top: pos.y,
+      width: '6rem',
+      height: '6rem',
+      zIndex: 50,
+      pointerEvents: 'auto',
+      userSelect: 'none',
+      transition: 'all 1.2s ease-in-out',
+      transform: `rotate(${angle}deg)`,
+    }}
+  >
+    {/* Water-like tooltip (always upright and centered relative to Meap) */}
+    {hovering && (
+      <div
+        className={`absolute ${getTooltipPosition(pos.zone)} px-3 py-1 text-sm rounded-full backdrop-blur-md ${
+          theme === 'dark' ? 'text-black bg-white/80' : 'text-white bg-black/80'
+        }`}
+        style={{
+          transform: 'rotate(0deg)',
+          transition: 'transform 0.3s ease, opacity 0.3s ease',
+        }}
+      >
+        Meap
+      </div>
+    )}
+  
+    {/* Meap inside a floating container */}
+    <div
       ref={meapRef}
-      style={{
-        position: 'fixed',
-        left: pos.x,
-        top: pos.y,
-        width: '6rem',
-        height: '6rem',
-        zIndex: 50,
-        pointerEvents: 'none',
-        userSelect: 'none',
-        transition: 'all 1.2s ease-in-out',
-        transform: `rotate(${angle}deg)`,
-      }}
+      className="w-full h-full relative animate-float"
+      onMouseEnter={() => setHovering(true)}
+      onMouseLeave={() => setHovering(false)}
     >
       <img
-        src={theme === 'dark' ? '/meap/nobgblink.png' : '/meap/idlemeap.png'}       
-         alt="Meap"
-        className="w-full h-full object-contain animate-float"
+        src={theme === 'dark' ? '/meap/nobgblink.png' : '/meap/idlemeap.png'}
+        alt="Meap"
+        className="w-full h-full object-contain cursor-pointer"
       />
     </div>
-  );
+  </div>
+  );  
 }
