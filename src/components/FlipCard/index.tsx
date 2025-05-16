@@ -17,7 +17,7 @@ export function FlipCard({
   theme: 'dark' | 'light';
 }) {
   const [flipped, setFlipped] = useState(false);
-  const [showHint, setShowHint] = useState(true);
+  const [, setShowHint] = useState(true);
 
   const frontClasses = clsx(
     'absolute inset-0 rounded-3xl p-6 flex flex-col justify-center items-center backface-hidden transition-transform',
@@ -48,7 +48,7 @@ export function FlipCard({
       >
         {/* Front */}
         <div className={frontClasses}>
-        {!flipped || showHint && (
+        {!flipped  && (
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
