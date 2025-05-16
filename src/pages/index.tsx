@@ -493,22 +493,18 @@ export default function Home() {
 <section className="relative">
   <div className="h-screen">
   <div className="absolute right-0 opacity-100  pointer-events-none">
-  <Image
+  <img
     src="/meap/sidemeapblack.png"
-    alt="Meap"
+    alt="Creepy Meap"
     className="h-[80vh] object-contain"
-    width={1000}
-    height={1000}
   />
 </div>
 
 <div className="absolute left-0 opacity-100  pointer-events-none">
-  <Image
+  <img
     src="/meap/mrsmeapgray.png"
-    alt="Meap"
+    alt="Creepy Meap"
     className="h-[80vh] object-contain"
-    width={1000}
-    height={1000}
   />
 </div>
 <div className=" text-center m-auto">
