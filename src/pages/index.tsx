@@ -6,7 +6,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MeapFloat from "@/components/MeapFloat";
 import Navbar from '@/components/NavBar';
 import { FlipCard } from "@/components/FlipCard";
-import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
