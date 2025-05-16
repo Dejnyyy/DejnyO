@@ -554,9 +554,7 @@ export default function Home() {
 </svg>
   {/* 4-Point Star in the Center */}
   <div className={`absolute animate-pulse top-[30%] left-1/2 -translate-x-1/2 w-8 h-8 sm:w-[5vw] sm:h-[5vw] md:w-[3vw] md:h-[3vw] rotate-45 ${theme === "dark" ? "bg-white":"bg-black"} shadow-md`} />
-
   </div>
-
 </section>
 
 
