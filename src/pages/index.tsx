@@ -236,52 +236,66 @@ export default function Home() {
               theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
             }`}
           >
-            Crafting immersive websites and apps with music, motion, and creativity.
+            Making better online world for people
           </motion.p>
       </section>
 
 
-      {/* About Section with Parallax DejnyO */}
-      <section className={`relative py-32 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-     
+     {/* About Section with Parallax DejnyO */}
+<section className={`relative py-32 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+  {/* Giant floating background text */}
+  <h2
+    ref={dejnyoTextRef}
+    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
+      theme === 'dark'
+        ? 'from-cyan-400 via-blue-500 to-purple-500'
+        : 'from-purple-400 via-pink-400 to-rose-400'
+    } select-none whitespace-nowrap pointer-events-none opacity-20`}
+  >
+    DejnyO
+  </h2>
 
-        {/* Giant floating background text */}
-        <h2
-          ref={dejnyoTextRef}
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
-            theme === 'dark'
-              ? 'from-cyan-400 via-blue-500 to-purple-500'
-              : 'from-purple-400 via-pink-400 to-rose-400'
-          } select-none whitespace-nowrap pointer-events-none opacity-20`}
-        >
-          DejnyO
-        </h2>
+  {/* Foreground content */}
+  <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center px-6 md:px-16">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: true }}
+    >
+      <h3 className={`text-4xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r ${
+        theme === 'dark'
+          ? 'from-cyan-400 via-blue-400 to-purple-400'
+          : 'from-purple-400 via-pink-400 to-rose-400'
+      }`}>
+        Who We Are
+      </h3>
 
-        {/* Foreground content */}
-        <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            viewport={{ once: true }}
-            className="mx-10"
-          >
-            <h3 className={`text-4xl font-bold mb-6 lg:w-2/3 xl:w-1/2 text-transparent bg-clip-text bg-gradient-to-r ${
-              theme === 'dark'
-                ? 'from-cyan-400 via-blue-400 to-purple-400'
-                : 'from-purple-400 via-pink-400 to-rose-400'
-            }`}>
-              Who We Are
-            </h3>
-            
-            <p className={`text-lg leading-relaxed ${
-              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-            }`}>
-              DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <p className={`text-lg leading-relaxed mb-6 ${
+        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+      }`}>
+        DejnyO is a digital agency blending <span className="font-semibold">creativity</span> with <span className="font-semibold">technology</span>. Our work is powered by design, driven by motion, and inspired by sound.
+      </p>
+
+      <ul className="space-y-3">
+        {[
+          { text: "Fast delivery & modern code", emoji: "⚡" },
+          { text: "Reliable performance across devices", emoji: "🛠️" },
+          { text: "Dedicated & friendly support", emoji: "🤝" },
+          { text: "Worth every click", emoji: "💎" },
+        ].map(({ text, emoji }, index) => (
+          <li key={index} className={`flex items-start gap-3 text-lg ${
+            theme === 'dark' ? 'text-white' : 'text-black'
+          }`}>
+            <span className="text-2xl">{emoji}</span>
+            <span>{text}</span>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
+  </div>
+</section>
+
 
   <section ref={containerRef} id="about" className={`relative py-36 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <div className="max-w-7xl mx-auto md:px-8 flex flex-col items-center gap-12 relative">
@@ -516,9 +530,27 @@ export default function Home() {
   </h2>
   
 </div>
-<div className="absolute top-1/2 left-0 w-full z-0">
-  <div className="w-full border-t border-dotted border-white/30"></div>
-</div>
+<svg
+  viewBox="0 0 1000 200"
+  className="absolute md:top-[20vh] top-[10vh] left-0 w-full h-[100px] md:h-[200px] pointer-events-none z-0"
+  preserveAspectRatio="none"
+>
+  {/* Left Meap → Title */}
+  <path
+    d="M 150 180 Q 500 20 500 0"
+    stroke={theme === 'dark' ? 'white' : 'black'}
+    strokeWidth="2"
+    fill="transparent"
+  />
+  {/* Right Meap → Title */}
+  <path
+    d="M 850 180 Q 500 20 500 0"
+    stroke={theme === 'dark' ? 'white' : 'black'}
+    strokeWidth="2"
+    fill="transparent"
+  />
+</svg>
+
 
   </div>
 
