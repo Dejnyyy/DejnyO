@@ -1,5 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+
 
 type Zone = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 
@@ -114,10 +116,12 @@ export default function SmartTiltMeap({ theme }: { theme: 'dark' | 'light' }) {
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
     >
-      <img
+      <Image
         src={theme === 'dark' ? '/meap/nobgblink.png' : '/meap/idlemeap.png'}
         alt="Meap"
         className="w-full h-full object-contain cursor-pointer"
+        width={1000}
+        height={1000}
       />
     </div>
   </div>

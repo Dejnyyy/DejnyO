@@ -6,6 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MeapFloat from "@/components/MeapFloat";
 import Navbar from '@/components/NavBar';
 import { FlipCard } from "@/components/FlipCard";
+import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -113,17 +114,7 @@ export default function Home() {
       },
     });
   }, []);
-  useEffect(() => {
-    gsap.to("#frost-layer", {
-      opacity: 0.7,
-      scrollTrigger: {
-        trigger: heroRef.current,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
-  }, []);
+  
   
   const handleSearch = (query: string) => {
     const elements = document.querySelectorAll("section, h1, h2, h3, p");
@@ -149,6 +140,7 @@ export default function Home() {
   useEffect(() => {
     document.body.style.backgroundColor = theme === 'dark' ? '#000000' : '#ffffff';
   }, [theme]);
+
   return (
     <div className={`transition-colors duration-500 ${theme === "dark" ? "text-white" : "text-black"} font-sans`}>
     <Head>
@@ -187,111 +179,110 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-<section
-  ref={heroRef}
-  className={`relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden px-6 ${
-    theme === 'dark' ? 'bg-black' : 'bg-white'
-  }`}
->
-  {/* Blurred Animated Background */}
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    <div
-      className={`absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 ${
-        theme === 'dark'
-          ? 'bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20'
-          : 'bg-gradient-to-br from-purple-400 via-pink-400 to-rose-400 opacity-20'
-      }`}
-    />
-  </div>
-
-  {/* Particle background */}
-  <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {Array.from({ length: 30 }).map((_, i) => (
-      <div
-        key={i}
-        className={`absolute w-1 h-1 rounded-full animate-particle ${
-          theme === 'dark' ? 'bg-white/30' : 'bg-black/20'
+      <section
+        ref={heroRef}
+        className={`relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden px-6 ${
+          theme === 'dark' ? 'bg-black' : 'bg-white'
         }`}
-        style={{
-          top: `${Math.random() * 100}%`,
-          left: `${Math.random() * 100}%`,
-          animationDuration: `${5 + Math.random() * 10}s`,
-          animationDelay: `${Math.random() * 4}s`,
-        }}
-      />
-    ))}
-  </div>
+      >
+        {/* Blurred Animated Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className={`absolute top-1/2 left-1/2 w-[600px] h-[600px] rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 ${
+              theme === 'dark'
+                ? 'bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 opacity-20'
+                : 'bg-gradient-to-br from-purple-400 via-pink-400 to-rose-400 opacity-20'
+            }`}
+          />
+        </div>
 
-  {/* Frost layer on scroll */}
-  <div className="absolute inset-0 bg-white/5 backdrop-blur-sm opacity-0" id="frost-layer" />
+        {/* Particle background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {Array.from({ length: 30 }).map((_, i) => (
+            <div
+              key={i}
+              className={`absolute w-1 h-1 rounded-full animate-particle ${
+                theme === 'dark' ? 'bg-white/30' : 'bg-black/20'
+              }`}
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${5 + Math.random() * 10}s`,
+                animationDelay: `${Math.random() * 4}s`,
+              }}
+            />
+          ))}
+        </div>
 
-  {/* Foreground Hero Content */}
-  <motion.h1
-    initial={{ opacity: 0, scale: 0.9 }}
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 1.2 }}
-    className={`text-6xl md:text-8xl w-auto font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r ${
-      theme === 'dark'
-        ? 'from-cyan-400 via-blue-400 to-purple-500'
-        : 'from-purple-400 via-pink-400 to-rose-400'
-    }`}
-  >
-    DejnyO
-  </motion.h1>
+        {/* Frost layer on scroll */}
+       
+          <motion.h1
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2 }}
+            className={`text-6xl md:text-8xl font-extrabold mb-6 py-2 text-transparent bg-clip-text bg-gradient-to-r ${
+              theme === 'dark'
+                ? 'from-cyan-400 via-blue-400 to-purple-500'
+                : 'from-purple-400 via-pink-400 to-rose-400'
+            }`}
+          >
+            DejnyO
+          </motion.h1>
 
-  <motion.p
-    initial={{ opacity: 0, y: 30 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.6, duration: 1 }}
-    className={`text-xl md:text-2xl max-w-2xl ${
-      theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-    }`}
-  >
-    Crafting immersive websites and apps with music, motion, and creativity.
-  </motion.p>
-</section>
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 1 }}
+            className={`text-xl md:text-2xl max-w-2xl ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}
+          >
+            Crafting immersive websites and apps with music, motion, and creativity.
+          </motion.p>
+      </section>
 
 
-{/* About Section with Parallax DejnyO */}
-<section className={`relative py-32 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-  
-  {/* Giant floating background text */}
-  <h2
-    ref={dejnyoTextRef}
-    className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
-      theme === 'dark'
-        ? 'from-cyan-400 via-blue-500 to-purple-500'
-        : 'from-purple-400 via-pink-400 to-rose-400'
-    } select-none whitespace-nowrap pointer-events-none opacity-20`}
-  >
-    DejnyO
-  </h2>
+      {/* About Section with Parallax DejnyO */}
+      <section className={`relative py-32 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+     
 
-  {/* Foreground content */}
-  <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      viewport={{ once: true }}
-      className="mx-10"
-    >
-      <h3 className={`text-4xl font-bold mb-6 lg:w-2/3 xl:w-1/2 text-transparent bg-clip-text bg-gradient-to-r ${
-        theme === 'dark'
-          ? 'from-cyan-400 via-blue-400 to-purple-400'
-          : 'from-purple-400 via-pink-400 to-rose-400'
-      }`}>
-        Who We Are
-      </h3>
-      
-      <p className={`text-lg leading-relaxed ${
-        theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
-      }`}>
-        DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Whether it’s a music artist’s portfolio, a fan experience platform, or a custom-built streaming web app, we make sure every beat looks as good as it sounds. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
-      </p>
-    </motion.div>
-  </div>
-</section>
+        {/* Giant floating background text */}
+        <h2
+          ref={dejnyoTextRef}
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[80px] md:text-[140px] font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
+            theme === 'dark'
+              ? 'from-cyan-400 via-blue-500 to-purple-500'
+              : 'from-purple-400 via-pink-400 to-rose-400'
+          } select-none whitespace-nowrap pointer-events-none opacity-20`}
+        >
+          DejnyO
+        </h2>
+
+        {/* Foreground content */}
+        <div className="relative z-10 grid md:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="mx-10"
+          >
+            <h3 className={`text-4xl font-bold mb-6 lg:w-2/3 xl:w-1/2 text-transparent bg-clip-text bg-gradient-to-r ${
+              theme === 'dark'
+                ? 'from-cyan-400 via-blue-400 to-purple-400'
+                : 'from-purple-400 via-pink-400 to-rose-400'
+            }`}>
+              Who We Are
+            </h3>
+            
+            <p className={`text-lg leading-relaxed ${
+              theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              DejnyO is a digital agency blending code with creativity. We specialize in web and app development with a unique edge — most of our projects are rooted in music. Graphic design is a core part of our identity — we believe visuals should move with the rhythm.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
   <section ref={containerRef} id="about" className={`relative py-36 overflow-hidden ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   <div className="max-w-7xl mx-auto md:px-8 flex flex-col items-center gap-12 relative">
@@ -304,7 +295,6 @@ export default function Home() {
     }`}>
       What We Create
     </h2>
-
     {/* Desktop Layout */}
     <div className="relative w-full h-[400px] hidden md:block">
       {services.map((service, index) => (
@@ -363,7 +353,6 @@ export default function Home() {
     </div>
   </div>
 </section>
-
 
 {/* Offer Section - Updated Pricing Models */}
 <section id="offer" className={`py-24 px-6 w-full text-center ${
@@ -474,7 +463,7 @@ export default function Home() {
 
 {/* Our Team Section */}
 <section id="team" className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
-  <h2 className={`text-5xl font-bold mb-16 text-transparent lg:w-1/5 mx-auto bg-clip-text bg-gradient-to-r ${
+  <h2 className={`text-5xl font-bold mb-16 text-transparent lg:w-1/4 mx-auto bg-clip-text bg-gradient-to-r ${
     theme === 'dark' 
       ? 'from-cyan-400 via-blue-500 to-purple-500' 
       : 'from-pink-400 via-pink-500 to-rose-400'
@@ -501,16 +490,57 @@ export default function Home() {
   </div>
 </section>
 
+<section className="relative">
+  <div className="h-screen">
+  <div className="absolute right-0 opacity-100  pointer-events-none">
+  <Image
+    src="/meap/sidemeapblack.png"
+    alt="Meap"
+    className="h-[80vh] object-contain"
+    width={1000}
+    height={1000}
+  />
+</div>
+
+<div className="absolute left-0 opacity-100  pointer-events-none">
+  <Image
+    src="/meap/mrsmeapgray.png"
+    alt="Meap"
+    className="h-[80vh] object-contain"
+    width={1000}
+    height={1000}
+  />
+</div>
+<div className=" text-center m-auto">
+<h2 className={`text-5xl font-bold text-transparent lg:w-1/4 mx-auto bg-clip-text bg-gradient-to-r ${
+    theme === 'dark' 
+      ? 'from-cyan-400 via-blue-500 to-purple-500' 
+      : 'from-pink-400 via-pink-500 to-rose-400'
+  }`}>
+    Meaps
+  </h2>
+  
+</div>
+<div className="absolute top-1/2 left-0 w-full z-0">
+  <div className="w-full border-t border-dotted border-white/30"></div>
+</div>
+
+  </div>
+
+</section>
+
+
 {/* Our Work Section */}
-<section className={`py-32 px-6 w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+<section className={`py-32  px-6 relative w-full text-center ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
   {/* Section Title */}
-  <h2 className={`text-5xl font-bold mb-16 lg:w-1/5 mx-auto text-transparent bg-clip-text bg-gradient-to-r 
+  <h2 className={`text-5xl font-bold mb-16 lg:w-1/4 mx-auto text-transparent bg-clip-text bg-gradient-to-r 
     ${theme === 'dark' ? 
     'from-cyan-400 via-blue-500 to-purple-500' :
      'from-purple-400 via-pink-400 to-rose-400'
      }`}>
     Our Work
   </h2>
+ 
 
   {/* Projects Grid */}
   <div className="grid md:grid-cols-2 gap-10">
