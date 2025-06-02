@@ -396,12 +396,12 @@ export default function Home() {
         <p className={`text-3xl font-extrabold mb-1 ${
           theme === 'dark' ? 'text-white' : 'text-gray-800'
         }`}>
-          $10<span className="text-lg font-normal">/month</span>
+          $20<span className="text-lg font-normal">/month</span>
         </p>
         <p className={`mb-6 ${
           theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          Starter package. Hosting, domain, security, and lifetime updates for different events and occasions.
+          Starter package. Hosting, domain, security, SEO and lifetime updates for different events and occasions.
         </p>
       </div>
       <a
@@ -424,7 +424,7 @@ export default function Home() {
     }`}>
       <div>
         <h3 className="text-3xl font-bold text-white mb-2">Pro</h3>
-        <p className="text-4xl font-extrabold text-white mb-1">$99</p>
+        <p className="text-4xl font-extrabold text-white mb-1">$199</p>
         <p className="text-white/80 mb-6">
           One-time payment. Professional custom site with SEO, unique animations, and branding polish.
         </p>
@@ -447,17 +447,17 @@ export default function Home() {
         <h3 className={`text-2xl font-bold mb-2 ${
           theme === 'dark' ? 'text-cyan-300' : 'text-pink-400'
         }`}>
-          Elite
+          School
         </h3>
         <p className={`text-3xl font-extrabold mb-1 ${
           theme === 'dark' ? 'text-white' : 'text-gray-800'
         }`}>
-          $199
+          $4,000 <span className="text-lg font-normal">/annually</span>
         </p>
         <p className={`mb-6 ${
           theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          Full custom solution. Web apps, e-commerce, interactive design — tailor-made to your needs.
+          Full custom solution for schools. User management, posts and calendar events and many other custom features.
         </p>
       </div>
       <a
@@ -468,7 +468,7 @@ export default function Home() {
       : 'from-pink-400 via-pink-500 to-rose-400 text-white'
   } hover:scale-110` }
       >
-        Get a Quote
+        Subscribe
       </a>
     </div>
   </div>
